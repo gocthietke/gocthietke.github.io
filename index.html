@@ -3,20 +3,510 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Góc Thiết Kế</title>
+
+    <title>Góc Thiết Kế - Review & So Sánh Sản Phẩm</title>
+
+    <meta name="description" content="Góc Thiết Kế - Review, đánh giá và so sánh sản phẩm trước khi mua.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6f8;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===== HEADER ===== */
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 1180px;
+            margin: auto;
+            padding: 17px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: #e85d04;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            color: #e85d04;
+        }
+
+        /* ===== HERO ===== */
+
+        .hero {
+            background: #111827;
+            color: white;
+            padding: 75px 20px;
+        }
+
+        .hero-inner {
+            max-width: 1180px;
+            margin: auto;
+        }
+
+        .hero h1 {
+            max-width: 760px;
+            font-size: 44px;
+            line-height: 1.2;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            color: #d1d5db;
+            font-size: 18px;
+        }
+
+        /* ===== MAIN ===== */
+
+        .container {
+            max-width: 1180px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 22px;
+        }
+
+        /* ===== CATEGORY ===== */
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 55px;
+        }
+
+        .category {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 23px;
+            transition: 0.2s;
+        }
+
+        .category:hover {
+            transform: translateY(-3px);
+            border-color: #e85d04;
+        }
+
+        .category h3 {
+            font-size: 18px;
+            margin-bottom: 7px;
+        }
+
+        .category p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* ===== ARTICLES ===== */
+
+        .articles {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .article {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .article:hover {
+            transform: translateY(-3px);
+        }
+
+        .article-image {
+            height: 190px;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .article-content {
+            padding: 21px;
+        }
+
+        .article-content h3 {
+            font-size: 19px;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        .article-content p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            color: #e85d04;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        /* ===== ABOUT ===== */
+
+        .about {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 35px;
+            margin-top: 55px;
+        }
+
+        .about h2 {
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .about p {
+            color: #555;
+            max-width: 900px;
+        }
+
+        /* ===== FOOTER ===== */
+
+        footer {
+            background: #111827;
+            color: #aaa;
+            text-align: center;
+            padding: 35px 20px;
+            margin-top: 65px;
+            font-size: 14px;
+        }
+
+        /* ===== MOBILE ===== */
+
+        @media (max-width: 850px) {
+
+            .header-inner {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 13px;
+            }
+
+            .hero {
+                padding: 55px 20px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .articles {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .categories {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .logo {
+                font-size: 23px;
+            }
+
+            nav {
+                font-size: 13px;
+            }
+        }
+    </style>
 </head>
+
 
 <body>
 
-    <h1>Góc Thiết Kế</h1>
+    <!-- HEADER -->
 
-    <p>
-        Website chia sẻ thông tin, đánh giá và so sánh sản phẩm.
-    </p>
+    <header>
 
-    <h2>Bài viết mới nhất</h2>
+        <div class="header-inner">
 
-    <h3>Đang cập nhật...</h3>
+            <a href="#" class="logo">
+                Góc <span>Thiết Kế</span>
+            </a>
+
+            <nav>
+                <a href="#">Trang chủ</a>
+                <a href="#">Nhà cửa</a>
+                <a href="#">Gia dụng</a>
+                <a href="#">Công nghệ</a>
+                <a href="#">Review</a>
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-inner">
+
+            <h1>
+                Góc nhìn trước khi bạn quyết định mua
+            </h1>
+
+            <p>
+                Review, đánh giá và so sánh sản phẩm
+                để giúp bạn có thêm thông tin trước khi xuống tiền.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+
+        <!-- CATEGORY -->
+
+        <h2 class="section-title">
+            Khám phá theo danh mục
+        </h2>
+
+
+        <div class="categories">
+
+            <a href="#" class="category">
+
+                <h3>🏠 Nhà cửa</h3>
+
+                <p>
+                    Đồ dùng và sản phẩm cho không gian sống.
+                </p>
+
+            </a>
+
+
+            <a href="#" class="category">
+
+                <h3>🍳 Đồ gia dụng</h3>
+
+                <p>
+                    Đánh giá và so sánh thiết bị gia đình.
+                </p>
+
+            </a>
+
+
+            <a href="#" class="category">
+
+                <h3>💻 Công nghệ</h3>
+
+                <p>
+                    Thiết bị công nghệ và phụ kiện đáng chú ý.
+                </p>
+
+            </a>
+
+
+            <a href="#" class="category">
+
+                <h3>🔎 Review</h3>
+
+                <p>
+                    Phân tích ưu nhược điểm trước khi mua.
+                </p>
+
+            </a>
+
+        </div>
+
+
+        <!-- ARTICLES -->
+
+        <h2 class="section-title">
+            Bài viết mới nhất
+        </h2>
+
+
+        <div class="articles">
+
+
+            <article class="article">
+
+                <div class="article-image">
+                    HÌNH ẢNH SẢN PHẨM
+                </div>
+
+                <div class="article-content">
+
+                    <h3>
+                        Đang cập nhật bài review đầu tiên
+                    </h3>
+
+                    <p>
+                        Những bài đánh giá và so sánh sản phẩm
+                        sẽ được cập nhật tại đây.
+                    </p>
+
+                    <a href="#" class="read-more">
+                        Đọc bài viết →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <article class="article">
+
+                <div class="article-image">
+                    HÌNH ẢNH SẢN PHẨM
+                </div>
+
+                <div class="article-content">
+
+                    <h3>
+                        So sánh sản phẩm trước khi mua
+                    </h3>
+
+                    <p>
+                        Phân tích ưu điểm, nhược điểm,
+                        đặc điểm và giá tham khảo.
+                    </p>
+
+                    <a href="#" class="read-more">
+                        Đọc bài viết →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <article class="article">
+
+                <div class="article-image">
+                    HÌNH ẢNH SẢN PHẨM
+                </div>
+
+                <div class="article-content">
+
+                    <h3>
+                        Sản phẩm nào phù hợp với bạn?
+                    </h3>
+
+                    <p>
+                        Tổng hợp thông tin giúp bạn
+                        dễ dàng lựa chọn hơn.
+                    </p>
+
+                    <a href="#" class="read-more">
+                        Đọc bài viết →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+        <!-- ABOUT -->
+
+        <section class="about">
+
+            <h2>
+                Về Góc Thiết Kế
+            </h2>
+
+            <p>
+                Góc Thiết Kế là nơi chia sẻ thông tin,
+                review và so sánh các sản phẩm được quan tâm.
+                Nội dung tập trung vào đặc điểm, ưu điểm,
+                nhược điểm và giá tham khảo để người đọc
+                có thêm thông tin trước khi mua hàng.
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 Góc Thiết Kế
+
+    </footer>
+
 
 </body>
 </html>
