@@ -2,754 +2,649 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Kiến Thức SOLA</title>
+<meta charset="UTF-8">
 
-    <meta name="description"
-        content="Kiến Thức SOLA - Góc nhìn thực tế về nhà cửa, gia dụng, công nghệ và nội thất.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- FONT -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Góc Thiết Kế</title>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
-        rel="stylesheet">
+<style>
 
+/* =========================================================
+   RESET
+========================================================= */
 
-    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        /* =====================================================
-           CÀI ĐẶT CHUNG
-        ===================================================== */
+html {
+    scroll-behavior: smooth;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f7f5f1;
+    color: #252525;
+}
 
-        html {
-            scroll-behavior: smooth;
-        }
 
-        body {
-            font-family: "DM Sans", Arial, sans-serif;
-            color: #292929;
-            background: #f7f7f5;
-            line-height: 1.6;
-        }
+/* =========================================================
+   HEADER
+========================================================= */
 
-        img {
-            display: block;
-            max-width: 100%;
-        }
+.header {
+    height: 78px;
+    background: #ffffff;
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-        .container {
-            width: 100%;
-            max-width: 1160px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    padding: 0 7%;
 
+    border-bottom: 1px solid #eeeeee;
 
-        /* =====================================================
-           HEADER
-        ===================================================== */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-        .header {
-            width: 100%;
-            height: 78px;
 
-            background: #ffffff;
+/* LOGO */
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+.logo {
+    font-family: Georgia, serif;
 
-            padding: 0 7%;
+    font-size: 32px;
 
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+    color: #682727;
 
-            border-bottom: 1px solid #eeeeee;
-        }
+    text-decoration: none;
 
-        .logo {
-            font-family: "Playfair Display", Georgia, serif;
+    font-weight: 500;
+}
 
-            font-size: 35px;
-            font-weight: 500;
+.logo span {
+    font-weight: 700;
+}
 
-            color: #6d2929;
 
-            letter-spacing: -1.2px;
+/* MENU */
 
-            white-space: nowrap;
-        }
+.menu {
+    display: flex;
 
-        .logo span {
-            font-weight: 600;
-        }
+    align-items: center;
 
+    gap: 32px;
+}
 
-        /* =====================================================
-           MENU
-        ===================================================== */
+.menu a {
+    text-decoration: none;
 
-        .menu {
-            display: flex;
-            align-items: center;
-            gap: 34px;
-        }
+    color: #555555;
 
-        .menu a {
-            height: 78px;
+    font-size: 15px;
 
-            display: flex;
-            align-items: center;
+    padding: 29px 0;
 
-            position: relative;
+    position: relative;
+}
 
-            font-size: 15px;
-            font-weight: 500;
+.menu a:hover {
+    color: #682727;
+}
 
-            color: #626262;
+.menu a.active {
+    color: #682727;
 
-            transition: 0.25s ease;
-        }
+    font-weight: 600;
+}
 
-        .menu a:hover {
-            color: #6d2929;
-        }
+.menu a.active::after {
+    content: "";
 
-        .menu a.active {
-            color: #6d2929;
-            font-weight: 600;
-        }
+    position: absolute;
 
-        .menu a.active::after {
-            content: "";
+    left: 0;
 
-            position: absolute;
+    right: 0;
 
-            left: 0;
-            right: 0;
-            bottom: 17px;
+    bottom: 17px;
 
-            height: 2px;
+    height: 2px;
 
-            background: #6d2929;
-        }
+    background: #682727;
+}
 
 
-        /* =====================================================
-           HERO - ẢNH BẠN ĐÃ TẢI LÊN
-        ===================================================== */
+/* =========================================================
+   HERO
+========================================================= */
 
-        .hero {
-            width: 100%;
+.hero {
+    width: 100%;
 
-            /*
-                Chiều cao banner.
-                Đây là phần khung hiển thị,
-                KHÔNG làm thay đổi file ảnh gốc.
-            */
+    height: 430px;
 
-            height: 420px;
+    overflow: hidden;
 
-            overflow: hidden;
+    background: #ffffff;
+}
 
-            background: #d8c8b8;
-        }
 
-        .hero-image {
-            width: 100%;
-            height: 100%;
+/*
+    QUAN TRỌNG:
 
-            object-fit: cover;
+    Ảnh lấy trực tiếp từ file hero.jpg
+    đang nằm cùng thư mục với index.html.
 
-            /*
-                Vị trí ảnh trong banner.
+    Không filter.
+    Không overlay.
+    Không đổi màu.
+*/
 
-                42% = lấy khu vực trung tâm
-                của ảnh làm trọng tâm.
-            */
+.hero img {
+    width: 100%;
 
-            object-position: center 42%;
+    height: 100%;
 
-            /*
-                Không chỉnh màu ảnh.
-            */
+    display: block;
 
-            filter: none;
+    object-fit: cover;
 
-            opacity: 1;
+    object-position: center center;
 
-            transform: none;
-        }
+    filter: none;
 
+    opacity: 1;
+}
 
-        /* =====================================================
-           DANH MỤC
-        ===================================================== */
 
-        .categories {
-            background: #f7f7f5;
+/* =========================================================
+   DANH MỤC
+========================================================= */
 
-            padding: 42px 0 52px;
-        }
+.categories {
+    padding: 48px 7%;
 
-        .section-title {
-            margin-bottom: 24px;
+    background: #f7f5f1;
+}
 
-            font-size: 30px;
-            line-height: 1.2;
+.container {
+    max-width: 1180px;
 
-            font-weight: 600;
+    margin: auto;
+}
 
-            color: #303030;
+.section-title {
+    font-size: 30px;
 
-            letter-spacing: -0.6px;
-        }
+    margin-bottom: 25px;
 
-        .category-grid {
-            display: grid;
+    color: #303030;
+}
 
-            grid-template-columns: repeat(4, 1fr);
 
-            gap: 16px;
-        }
+/* GRID */
 
-        .category-card {
-            min-height: 128px;
+.category-grid {
+    display: grid;
 
-            padding: 21px;
+    grid-template-columns: repeat(4, 1fr);
 
-            background: #ffffff;
+    gap: 16px;
+}
 
-            border: 1px solid #e7e5e1;
 
-            border-radius: 16px;
+/* CARD */
 
-            display: flex;
-            align-items: flex-start;
+.category {
+    background: #ffffff;
 
-            gap: 16px;
+    border: 1px solid #e6e2dc;
 
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
-        }
+    border-radius: 15px;
 
-        .category-card:hover {
-            transform: translateY(-4px);
+    padding: 22px;
 
-            box-shadow:
-                0 12px 28px rgba(0, 0, 0, 0.07);
-        }
+    min-height: 125px;
 
+    transition: 0.25s;
+}
 
-        /* =====================================================
-           ICON
-        ===================================================== */
+.category:hover {
+    transform: translateY(-4px);
 
-        .category-icon {
-            width: 45px;
-            min-width: 45px;
-            height: 45px;
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.06);
+}
 
-            border-radius: 50%;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+/* ICON */
 
-        .category-icon svg {
-            width: 22px;
-            height: 22px;
+.icon {
+    width: 44px;
 
-            fill: none;
+    height: 44px;
 
-            stroke: currentColor;
+    border-radius: 50%;
 
-            stroke-width: 1.7;
+    display: flex;
 
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
+    align-items: center;
 
-        .icon-house {
-            background: #f6ded3;
-            color: #a25c43;
-        }
+    justify-content: center;
 
-        .icon-home {
-            background: #dfead8;
-            color: #64845b;
-        }
+    margin-bottom: 13px;
 
-        .icon-tech {
-            background: #dce8f3;
-            color: #547898;
-        }
+    font-size: 20px;
+}
 
-        .icon-review {
-            background: #eadcf2;
-            color: #805d91;
-        }
+.icon-house {
+    background: #f5ddd2;
+}
 
+.icon-home {
+    background: #dfead8;
+}
 
-        /* =====================================================
-           TEXT DANH MỤC
-        ===================================================== */
+.icon-tech {
+    background: #dce8f3;
+}
 
-        .category-text h3 {
-            margin-bottom: 7px;
+.icon-review {
+    background: #eadcf1;
+}
 
-            font-size: 17px;
 
-            line-height: 1.3;
+/* TEXT */
 
-            font-weight: 600;
+.category h3 {
+    font-size: 17px;
 
-            color: #272727;
-        }
+    margin-bottom: 6px;
+}
 
-        .category-text p {
-            font-size: 13px;
+.category p {
+    font-size: 13px;
 
-            line-height: 1.5;
+    color: #777777;
 
-            color: #777777;
-        }
+    line-height: 1.5;
+}
 
 
-        /* =====================================================
-           BÀI VIẾT
-        ===================================================== */
+/* =========================================================
+   BÀI VIẾT
+========================================================= */
 
-        .articles {
-            background: #ffffff;
+.articles {
+    background: #ffffff;
 
-            padding: 55px 0 70px;
-        }
+    padding: 55px 7% 70px;
+}
 
-        .article-grid {
-            display: grid;
+.article-grid {
+    display: grid;
 
-            grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 
-            gap: 25px;
-        }
+    gap: 24px;
+}
 
-        .article-card {
-            overflow: hidden;
+.article {
+    background: #ffffff;
 
-            background: #ffffff;
+    border: 1px solid #e7e3df;
 
-            border: 1px solid #e8e5e1;
+    border-radius: 15px;
 
-            border-radius: 15px;
+    overflow: hidden;
 
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
-        }
+    transition: 0.25s;
+}
 
-        .article-card:hover {
-            transform: translateY(-5px);
+.article:hover {
+    transform: translateY(-4px);
 
-            box-shadow:
-                0 15px 35px rgba(0, 0, 0, 0.08);
-        }
+    box-shadow:
+        0 12px 28px rgba(0,0,0,0.07);
+}
 
-        .article-image {
-            width: 100%;
-            height: 215px;
 
-            overflow: hidden;
+/* ẢNH BÀI VIẾT */
 
-            background: #e9e5df;
-        }
+.article-image {
+    width: 100%;
 
-        .article-image img {
-            width: 100%;
-            height: 100%;
+    height: 210px;
 
-            object-fit: cover;
+    background: #eeeeee;
 
-            transition:
-                transform 0.5s ease;
-        }
+    overflow: hidden;
+}
 
-        .article-card:hover .article-image img {
-            transform: scale(1.04);
-        }
+.article-image img {
+    width: 100%;
 
-        .article-content {
-            padding: 22px;
-        }
+    height: 100%;
 
-        .article-category {
-            display: inline-block;
+    object-fit: cover;
+}
 
-            margin-bottom: 9px;
 
-            font-size: 11px;
+/* NỘI DUNG */
 
-            line-height: 1;
+.article-content {
+    padding: 21px;
+}
 
-            font-weight: 700;
+.article-category {
+    color: #8b3d3d;
 
-            letter-spacing: 0.8px;
+    font-size: 11px;
 
-            color: #8a3a3a;
-        }
+    font-weight: 700;
 
-        .article-content h3 {
-            margin-bottom: 10px;
+    margin-bottom: 8px;
 
-            font-family:
-                "Playfair Display",
-                Georgia,
-                serif;
+    letter-spacing: 0.8px;
+}
 
-            font-size: 21px;
+.article h3 {
+    font-family: Georgia, serif;
 
-            line-height: 1.32;
+    font-size: 21px;
 
-            font-weight: 500;
+    line-height: 1.35;
 
-            color: #292929;
-        }
+    margin-bottom: 10px;
+}
 
-        .article-content p {
-            margin-bottom: 17px;
+.article p {
+    font-size: 14px;
 
-            font-size: 14px;
+    color: #777777;
 
-            line-height: 1.6;
+    line-height: 1.6;
 
-            color: #777777;
-        }
+    margin-bottom: 15px;
+}
 
-        .read-more {
-            font-size: 13px;
+.read {
+    color: #682727;
 
-            font-weight: 600;
+    font-size: 13px;
 
-            color: #6d2929;
-        }
+    font-weight: 600;
 
+    text-decoration: none;
+}
 
-        /* =====================================================
-           GIỚI THIỆU
-        ===================================================== */
 
-        .about {
-            background: #f4f0ea;
+/* =========================================================
+   GIỚI THIỆU
+========================================================= */
 
-            padding: 70px 0;
-        }
+.about {
+    background: #f2ede6;
 
-        .about-box {
-            max-width: 820px;
+    padding: 70px 7%;
+}
 
-            margin: 0 auto;
+.about-inner {
+    max-width: 800px;
 
-            text-align: center;
-        }
+    margin: auto;
 
-        .about-box h2 {
-            margin-bottom: 20px;
+    text-align: center;
+}
 
-            font-family:
-                "Playfair Display",
-                Georgia,
-                serif;
+.about h2 {
+    font-family: Georgia, serif;
 
-            font-size: 38px;
+    color: #572727;
 
-            line-height: 1.2;
+    font-size: 36px;
 
-            font-weight: 500;
+    margin-bottom: 18px;
+}
 
-            color: #542525;
-        }
+.about p {
+    color: #686868;
 
-        .about-box p {
-            font-size: 16px;
+    font-size: 15px;
 
-            line-height: 1.8;
+    line-height: 1.8;
+}
 
-            color: #686868;
-        }
 
+/* =========================================================
+   FOOTER
+========================================================= */
 
-        /* =====================================================
-           FOOTER
-        ===================================================== */
+.footer {
+    background: #4c2020;
 
-        .footer {
-            background: #4d2020;
+    color: #ffffff;
 
-            color: #ffffff;
+    padding: 45px 7% 25px;
+}
 
-            padding: 45px 0 30px;
-        }
+.footer-inner {
+    max-width: 1180px;
 
-        .footer-inner {
-            display: flex;
+    margin: auto;
 
-            align-items: flex-start;
+    display: flex;
 
-            justify-content: space-between;
+    justify-content: space-between;
 
-            gap: 40px;
-        }
+    gap: 30px;
+}
 
-        .footer-logo {
-            margin-bottom: 8px;
+.footer-logo {
+    font-family: Georgia, serif;
 
-            font-family:
-                "Playfair Display",
-                Georgia,
-                serif;
+    font-size: 27px;
 
-            font-size: 28px;
+    margin-bottom: 8px;
+}
 
-            font-weight: 500;
-        }
+.footer-text {
+    color: rgba(255,255,255,0.7);
 
-        .footer-description {
-            font-size: 14px;
+    font-size: 13px;
+}
 
-            color:
-                rgba(255,255,255,0.72);
-        }
+.footer-links {
+    display: flex;
 
-        .footer-links {
-            display: flex;
+    gap: 22px;
 
-            gap: 25px;
+    flex-wrap: wrap;
+}
 
-            font-size: 14px;
+.footer-links a {
+    color: rgba(255,255,255,0.8);
 
-            color:
-                rgba(255,255,255,0.78);
-        }
+    text-decoration: none;
 
-        .footer-links a:hover {
-            color: #ffffff;
-        }
+    font-size: 13px;
+}
 
-        .copyright {
-            margin-top: 35px;
+.footer-links a:hover {
+    color: #ffffff;
+}
 
-            padding-top: 20px;
+.copyright {
+    max-width: 1180px;
 
-            border-top:
-                1px solid
-                rgba(255,255,255,0.16);
+    margin: 30px auto 0;
 
-            font-size: 12px;
+    padding-top: 18px;
 
-            color:
-                rgba(255,255,255,0.55);
-        }
+    border-top: 1px solid rgba(255,255,255,0.15);
 
+    color: rgba(255,255,255,0.5);
 
-        /* =====================================================
-           TABLET
-        ===================================================== */
+    font-size: 11px;
+}
 
-        @media (max-width: 1000px) {
 
-            .header {
-                padding: 0 4%;
-            }
+/* =========================================================
+   TABLET
+========================================================= */
 
-            .logo {
-                font-size: 29px;
-            }
+@media (max-width: 950px) {
 
-            .menu {
-                gap: 19px;
-            }
+    .header {
+        padding: 0 4%;
+    }
 
-            .menu a {
-                font-size: 14px;
-            }
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-            .category-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+    .article-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-            .article-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+}
 
 
-        /* =====================================================
-           ĐIỆN THOẠI
-        ===================================================== */
+/* =========================================================
+   MOBILE
+========================================================= */
 
-        @media (max-width: 650px) {
+@media (max-width: 650px) {
 
-            .header {
-                height: auto;
+    .header {
+        height: auto;
 
-                min-height: 76px;
+        padding: 15px 20px;
 
-                padding: 15px 20px;
+        display: block;
+    }
 
-                flex-direction: column;
+    .logo {
+        display: block;
 
-                align-items: flex-start;
+        margin-bottom: 13px;
 
-                gap: 10px;
-            }
+        font-size: 28px;
+    }
 
-            .logo {
-                font-size: 29px;
-            }
+    .menu {
+        width: 100%;
 
-            .menu {
-                width: 100%;
+        display: flex;
 
-                overflow-x: auto;
+        gap: 24px;
 
-                gap: 24px;
+        overflow-x: auto;
 
-                scrollbar-width: none;
-            }
+        padding-bottom: 4px;
+    }
 
-            .menu::-webkit-scrollbar {
-                display: none;
-            }
+    .menu a {
+        white-space: nowrap;
 
-            .menu a {
-                height: 35px;
+        padding: 5px 0;
 
-                flex: 0 0 auto;
+        font-size: 13px;
+    }
 
-                font-size: 13px;
-            }
+    .menu a.active::after {
+        bottom: -2px;
+    }
 
-            .menu a.active::after {
-                bottom: 0;
-            }
 
+    /* HERO MOBILE */
 
-            /* HERO MOBILE */
+    .hero {
+        height: 300px;
+    }
 
-            .hero {
-                height: 300px;
-            }
+    .hero img {
+        object-position: center center;
+    }
 
-            .hero-image {
-                object-position: center 40%;
-            }
 
+    /* DANH MỤC */
 
-            /* DANH MỤC */
+    .categories {
+        padding: 38px 20px;
+    }
 
-            .categories {
-                padding: 35px 0 40px;
-            }
+    .section-title {
+        font-size: 26px;
+    }
 
-            .section-title {
-                font-size: 26px;
-            }
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
 
-            .category-grid {
-                grid-template-columns: 1fr;
 
-                gap: 12px;
-            }
+    /* BÀI VIẾT */
 
-            .category-card {
-                min-height: 105px;
+    .articles {
+        padding: 45px 20px 55px;
+    }
 
-                padding: 18px;
-            }
+    .article-grid {
+        grid-template-columns: 1fr;
+    }
 
 
-            /* BÀI VIẾT */
+    /* GIỚI THIỆU */
 
-            .articles {
-                padding: 40px 0 50px;
-            }
+    .about {
+        padding: 55px 20px;
+    }
 
-            .article-grid {
-                grid-template-columns: 1fr;
+    .about h2 {
+        font-size: 30px;
+    }
 
-                gap: 18px;
-            }
 
-            .article-image {
-                height: 220px;
-            }
+    /* FOOTER */
 
+    .footer {
+        padding-left: 20px;
 
-            /* GIỚI THIỆU */
+        padding-right: 20px;
+    }
 
-            .about {
-                padding: 55px 0;
-            }
+    .footer-inner {
+        display: block;
+    }
 
-            .about-box h2 {
-                font-size: 31px;
-            }
+    .footer-links {
+        margin-top: 25px;
+    }
 
-            .about-box p {
-                font-size: 14px;
-            }
+}
 
 
-            /* FOOTER */
+/* =========================================================
+   MOBILE NHỎ
+========================================================= */
 
-            .footer-inner {
-                flex-direction: column;
+@media (max-width: 400px) {
 
-                gap: 25px;
-            }
+    .hero {
+        height: 250px;
+    }
 
-            .footer-links {
-                flex-wrap: wrap;
+}
 
-                gap: 16px;
-            }
-        }
-
-
-        /* =====================================================
-           ĐIỆN THOẠI NHỎ
-        ===================================================== */
-
-        @media (max-width: 400px) {
-
-            .logo {
-                font-size: 25px;
-            }
-
-            .hero {
-                height: 250px;
-            }
-        }
-
-    </style>
+</style>
 
 </head>
 
@@ -757,20 +652,510 @@
 <body>
 
 
-    <!-- =====================================================
-         HEADER
-    ===================================================== -->
+<!-- =======================================================
+     HEADER
+======================================================== -->
 
-    <header class="header">
+<header class="header">
 
-        <a href="#" class="logo">
-            Kiến Thức <span>SOLA</span>
+    <a href="#" class="logo">
+        Góc <span>Thiết Kế</span>
+    </a>
+
+
+    <nav class="menu">
+
+        <a href="#" class="active">
+            Trang chủ
         </a>
 
+        <a href="#nha-cua">
+            Nhà cửa
+        </a>
 
-        <nav class="menu">
+        <a href="#gia-dung">
+            Gia dụng
+        </a>
 
-            <a href="#" class="active">
+        <a href="#cong-nghe">
+            Công nghệ
+        </a>
+
+        <a href="#review">
+            Review
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =======================================================
+     ẢNH HERO
+======================================================== -->
+
+<section class="hero">
+
+    <!--
+        FILE ẢNH CỦA BẠN:
+
+        hero.jpg
+
+        File này đang nằm cùng thư mục
+        với index.html.
+    -->
+
+    <img
+        src="./hero.jpg"
+        alt="Modern Organic"
+    >
+
+</section>
+
+
+
+<!-- =======================================================
+     DANH MỤC
+======================================================== -->
+
+<section class="categories">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Khám phá theo danh mục
+        </h2>
+
+
+        <div class="category-grid">
+
+
+            <a
+                href="#nha-cua"
+                class="category"
+            >
+
+                <div class="icon icon-house">
+                    🏠
+                </div>
+
+                <h3>
+                    Nhà cửa
+                </h3>
+
+                <p>
+                    Kiến trúc, nội thất
+                    và không gian sống.
+                </p>
+
+            </a>
+
+
+
+            <a
+                href="#gia-dung"
+                class="category"
+            >
+
+                <div class="icon icon-home">
+                    🛋️
+                </div>
+
+                <h3>
+                    Gia dụng
+                </h3>
+
+                <p>
+                    Đánh giá thiết bị
+                    và sản phẩm gia đình.
+                </p>
+
+            </a>
+
+
+
+            <a
+                href="#cong-nghe"
+                class="category"
+            >
+
+                <div class="icon icon-tech">
+                    💻
+                </div>
+
+                <h3>
+                    Công nghệ
+                </h3>
+
+                <p>
+                    Thiết bị công nghệ
+                    cho cuộc sống hiện đại.
+                </p>
+
+            </a>
+
+
+
+            <a
+                href="#review"
+                class="category"
+            >
+
+                <div class="icon icon-review">
+                    🔍
+                </div>
+
+                <h3>
+                    Review
+                </h3>
+
+                <p>
+                    Review và so sánh
+                    trước khi lựa chọn.
+                </p>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     BÀI VIẾT
+======================================================== -->
+
+<section class="articles">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Bài viết mới nhất
+        </h2>
+
+
+        <div class="article-grid">
+
+
+            <!-- BÀI 1 -->
+
+            <article
+                class="article"
+                id="nha-cua"
+            >
+
+                <div class="article-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=85"
+                        alt="Nhà đẹp"
+                    >
+
+                </div>
+
+
+                <div class="article-content">
+
+                    <div class="article-category">
+                        NHÀ CỬA
+                    </div>
+
+                    <h3>
+                        Những điều cần biết
+                        trước khi thiết kế
+                        không gian sống
+                    </h3>
+
+                    <p>
+                        Những kinh nghiệm thực tế
+                        giúp lựa chọn giải pháp
+                        phù hợp cho ngôi nhà.
+                    </p>
+
+                    <a href="#" class="read">
+                        Đọc bài viết →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- BÀI 2 -->
+
+            <article
+                class="article"
+                id="gia-dung"
+            >
+
+                <div class="article-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1200&q=85"
+                        alt="Gia dụng"
+                    >
+
+                </div>
+
+
+                <div class="article-content">
+
+                    <div class="article-category">
+                        GIA DỤNG
+                    </div>
+
+                    <h3>
+                        Có nên đầu tư
+                        thiết bị gia dụng
+                        cao cấp?
+                    </h3>
+
+                    <p>
+                        Những yếu tố cần cân nhắc
+                        trước khi lựa chọn thiết bị.
+                    </p>
+
+                    <a href="#" class="read">
+                        Đọc bài viết →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- BÀI 3 -->
+
+            <article
+                class="article"
+                id="cong-nghe"
+            >
+
+                <div class="article-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=85"
+                        alt="Công nghệ"
+                    >
+
+                </div>
+
+
+                <div class="article-content">
+
+                    <div class="article-category">
+                        CÔNG NGHỆ
+                    </div>
+
+                    <h3>
+                        Những thiết bị công nghệ
+                        đáng chú ý cho gia đình
+                    </h3>
+
+                    <p>
+                        Tổng hợp những thiết bị
+                        đáng quan tâm cho không gian sống.
+                    </p>
+
+                    <a href="#" class="read">
+                        Đọc bài viết →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- BÀI 4 -->
+
+            <article
+                class="article"
+                id="review"
+            >
+
+                <div class="article-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=85"
+                        alt="Review nội thất"
+                    >
+
+                </div>
+
+
+                <div class="article-content">
+
+                    <div class="article-category">
+                        REVIEW
+                    </div>
+
+                    <h3>
+                        Review nội thất:
+                        Đẹp thôi chưa đủ
+                    </h3>
+
+                    <p>
+                        Cùng nhìn vào chất lượng,
+                        công năng và độ bền.
+                    </p>
+
+                    <a href="#" class="read">
+                        Đọc bài viết →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- BÀI 5 -->
+
+            <article class="article">
+
+                <div class="article-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=85"
+                        alt="Nội thất"
+                    >
+
+                </div>
+
+
+                <div class="article-content">
+
+                    <div class="article-category">
+                        NHÀ CỬA
+                    </div>
+
+                    <h3>
+                        Chọn vật liệu thế nào
+                        để ngôi nhà bền đẹp?
+                    </h3>
+
+                    <p>
+                        Những tiêu chí quan trọng
+                        khi lựa chọn vật liệu.
+                    </p>
+
+                    <a href="#" class="read">
+                        Đọc bài viết →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- BÀI 6 -->
+
+            <article class="article">
+
+                <div class="article-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=85"
+                        alt="Không gian sống"
+                    >
+
+                </div>
+
+
+                <div class="article-content">
+
+                    <div class="article-category">
+                        REVIEW
+                    </div>
+
+                    <h3>
+                        Những tiêu chí quan trọng
+                        khi mua nội thất
+                    </h3>
+
+                    <p>
+                        Không chỉ nhìn vào hình thức,
+                        hãy quan tâm đến trải nghiệm.
+                    </p>
+
+                    <a href="#" class="read">
+                        Đọc bài viết →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     GIỚI THIỆU
+======================================================== -->
+
+<section class="about">
+
+    <div class="about-inner">
+
+        <h2>
+            Về Góc Thiết Kế
+        </h2>
+
+        <p>
+            Nơi chia sẻ những góc nhìn thực tế
+            về kiến trúc, nội thất, nhà cửa,
+            gia dụng và công nghệ.
+            Nội dung được xây dựng dựa trên
+            trải nghiệm thực tế và góc nhìn
+            của người làm trong lĩnh vực thiết kế.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     FOOTER
+======================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-inner">
+
+
+        <div>
+
+            <div class="footer-logo">
+                Góc Thiết Kế
+            </div>
+
+            <div class="footer-text">
+                Góc nhìn thực tế cho không gian sống.
+            </div>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="#">
                 Trang chủ
             </a>
 
@@ -790,592 +1175,19 @@
                 Review
             </a>
 
-        </nav>
-
-    </header>
-
-
-
-    <!-- =====================================================
-         HERO
-    ===================================================== -->
-
-    <section class="hero">
-
-        <!--
-            ẢNH BẠN ĐÃ UPLOAD LÊN GITHUB
-
-            Tên file:
-            hero.jpg
-
-            Ảnh phải nằm cùng thư mục với index.html.
-        -->
-
-        <img
-            class="hero-image"
-            src="hero.jpg"
-            alt="Modern Organic Interior">
-
-    </section>
-
-
-
-    <!-- =====================================================
-         DANH MỤC
-    ===================================================== -->
-
-    <section class="categories">
-
-        <div class="container">
-
-            <h2 class="section-title">
-                Khám phá theo danh mục
-            </h2>
-
-
-            <div class="category-grid">
-
-
-                <!-- NHÀ CỬA -->
-
-                <a
-                    href="#nha-cua"
-                    class="category-card">
-
-                    <div class="category-icon icon-house">
-
-                        <svg viewBox="0 0 24 24">
-
-                            <path d="M3 10.5L12 3l9 7.5"></path>
-
-                            <path d="M5 9.5V21h14V9.5"></path>
-
-                            <path d="M9 21v-6h6v6"></path>
-
-                        </svg>
-
-                    </div>
-
-
-                    <div class="category-text">
-
-                        <h3>
-                            Nhà cửa
-                        </h3>
-
-                        <p>
-                            Đồ dùng và sản phẩm
-                            cho không gian sống.
-                        </p>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- GIA DỤNG -->
-
-                <a
-                    href="#gia-dung"
-                    class="category-card">
-
-                    <div class="category-icon icon-home">
-
-                        <svg viewBox="0 0 24 24">
-
-                            <rect
-                                x="3"
-                                y="8"
-                                width="18"
-                                height="11"
-                                rx="2">
-                            </rect>
-
-                            <path d="M7 8V5h10v3"></path>
-
-                            <path d="M7 19v2"></path>
-
-                            <path d="M17 19v2"></path>
-
-                        </svg>
-
-                    </div>
-
-
-                    <div class="category-text">
-
-                        <h3>
-                            Đồ gia dụng
-                        </h3>
-
-                        <p>
-                            Đánh giá và so sánh
-                            thiết bị gia đình.
-                        </p>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- CÔNG NGHỆ -->
-
-                <a
-                    href="#cong-nghe"
-                    class="category-card">
-
-                    <div class="category-icon icon-tech">
-
-                        <svg viewBox="0 0 24 24">
-
-                            <rect
-                                x="4"
-                                y="4"
-                                width="16"
-                                height="12"
-                                rx="1">
-                            </rect>
-
-                            <path d="M8 20h8"></path>
-
-                            <path d="M12 16v4"></path>
-
-                        </svg>
-
-                    </div>
-
-
-                    <div class="category-text">
-
-                        <h3>
-                            Công nghệ
-                        </h3>
-
-                        <p>
-                            Thiết bị công nghệ
-                            và phụ kiện đáng chú ý.
-                        </p>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- REVIEW -->
-
-                <a
-                    href="#review"
-                    class="category-card">
-
-                    <div class="category-icon icon-review">
-
-                        <svg viewBox="0 0 24 24">
-
-                            <circle
-                                cx="10.5"
-                                cy="10.5"
-                                r="6.5">
-                            </circle>
-
-                            <path d="M16 16l5 5"></path>
-
-                        </svg>
-
-                    </div>
-
-
-                    <div class="category-text">
-
-                        <h3>
-                            Review
-                        </h3>
-
-                        <p>
-                            Phân tích ưu nhược điểm
-                            trước khi mua.
-                        </p>
-
-                    </div>
-
-                </a>
-
-
-            </div>
-
         </div>
 
-    </section>
 
+    </div>
 
 
-    <!-- =====================================================
-         BÀI VIẾT
-    ===================================================== -->
+    <div class="copyright">
 
-    <section class="articles">
+        © 2026 Góc Thiết Kế. All rights reserved.
 
-        <div class="container">
+    </div>
 
-            <h2 class="section-title">
-                Bài viết mới nhất
-            </h2>
-
-
-            <div class="article-grid">
-
-
-                <!-- BÀI 1 -->
-
-                <article
-                    class="article-card"
-                    id="nha-cua">
-
-                    <div class="article-image">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=85"
-                            alt="Không gian nhà ở hiện đại">
-
-                    </div>
-
-
-                    <div class="article-content">
-
-                        <div class="article-category">
-                            NHÀ CỬA
-                        </div>
-
-                        <h3>
-                            Những điều cần biết
-                            trước khi thiết kế
-                            không gian sống
-                        </h3>
-
-                        <p>
-                            Những kinh nghiệm thực tế
-                            giúp gia chủ lựa chọn
-                            giải pháp phù hợp.
-                        </p>
-
-                        <a href="#" class="read-more">
-                            Đọc bài viết →
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- BÀI 2 -->
-
-                <article
-                    class="article-card"
-                    id="gia-dung">
-
-                    <div class="article-image">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1200&q=85"
-                            alt="Không gian bếp hiện đại">
-
-                    </div>
-
-
-                    <div class="article-content">
-
-                        <div class="article-category">
-                            GIA DỤNG
-                        </div>
-
-                        <h3>
-                            Có nên đầu tư
-                            thiết bị gia dụng
-                            cao cấp?
-                        </h3>
-
-                        <p>
-                            Những yếu tố cần cân nhắc
-                            trước khi lựa chọn thiết bị
-                            cho gia đình.
-                        </p>
-
-                        <a href="#" class="read-more">
-                            Đọc bài viết →
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- BÀI 3 -->
-
-                <article
-                    class="article-card"
-                    id="cong-nghe">
-
-                    <div class="article-image">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=85"
-                            alt="Thiết bị công nghệ">
-
-                    </div>
-
-
-                    <div class="article-content">
-
-                        <div class="article-category">
-                            CÔNG NGHỆ
-                        </div>
-
-                        <h3>
-                            Những thiết bị công nghệ
-                            đáng chú ý cho gia đình
-                        </h3>
-
-                        <p>
-                            Tổng hợp những thiết bị
-                            đáng quan tâm trong
-                            không gian sống hiện đại.
-                        </p>
-
-                        <a href="#" class="read-more">
-                            Đọc bài viết →
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- BÀI 4 -->
-
-                <article
-                    class="article-card"
-                    id="review">
-
-                    <div class="article-image">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=85"
-                            alt="Nội thất phòng khách">
-
-                    </div>
-
-
-                    <div class="article-content">
-
-                        <div class="article-category">
-                            REVIEW
-                        </div>
-
-                        <h3>
-                            Review nội thất:
-                            Đẹp thôi chưa đủ
-                        </h3>
-
-                        <p>
-                            Cùng nhìn vào chất lượng,
-                            công năng, độ bền và
-                            giá trị sử dụng thực tế.
-                        </p>
-
-                        <a href="#" class="read-more">
-                            Đọc bài viết →
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- BÀI 5 -->
-
-                <article class="article-card">
-
-                    <div class="article-image">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=85"
-                            alt="Nội thất hiện đại">
-
-                    </div>
-
-
-                    <div class="article-content">
-
-                        <div class="article-category">
-                            NHÀ CỬA
-                        </div>
-
-                        <h3>
-                            Chọn vật liệu thế nào
-                            để ngôi nhà bền đẹp?
-                        </h3>
-
-                        <p>
-                            Những tiêu chí quan trọng
-                            khi lựa chọn vật liệu
-                            cho không gian sống.
-                        </p>
-
-                        <a href="#" class="read-more">
-                            Đọc bài viết →
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- BÀI 6 -->
-
-                <article class="article-card">
-
-                    <div class="article-image">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=85"
-                            alt="Không gian nội thất">
-
-                    </div>
-
-
-                    <div class="article-content">
-
-                        <div class="article-category">
-                            REVIEW
-                        </div>
-
-                        <h3>
-                            Những tiêu chí quan trọng
-                            khi mua nội thất
-                        </h3>
-
-                        <p>
-                            Không chỉ nhìn vào hình thức,
-                            hãy quan tâm đến trải nghiệm
-                            sử dụng.
-                        </p>
-
-                        <a href="#" class="read-more">
-                            Đọc bài viết →
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         GIỚI THIỆU
-    ===================================================== -->
-
-    <section class="about">
-
-        <div class="container">
-
-            <div class="about-box">
-
-                <h2>
-                    Về Kiến Thức SOLA
-                </h2>
-
-                <p>
-                    Kiến Thức SOLA là nơi chia sẻ kiến thức,
-                    review và so sánh các sản phẩm liên quan
-                    đến nhà ở, nội thất, gia dụng và công nghệ.
-                    Nội dung tập trung vào trải nghiệm thực tế,
-                    ưu nhược điểm và những thông tin cần thiết
-                    trước khi đưa ra quyết định.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         FOOTER
-    ===================================================== -->
-
-    <footer class="footer">
-
-        <div class="container">
-
-            <div class="footer-inner">
-
-
-                <div>
-
-                    <div class="footer-logo">
-                        Kiến Thức SOLA
-                    </div>
-
-                    <div class="footer-description">
-                        Góc nhìn thực tế
-                        cho không gian sống hiện đại.
-                    </div>
-
-                </div>
-
-
-                <div class="footer-links">
-
-                    <a href="#">
-                        Trang chủ
-                    </a>
-
-                    <a href="#nha-cua">
-                        Nhà cửa
-                    </a>
-
-                    <a href="#gia-dung">
-                        Gia dụng
-                    </a>
-
-                    <a href="#cong-nghe">
-                        Công nghệ
-                    </a>
-
-                    <a href="#review">
-                        Review
-                    </a>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="copyright">
-                © 2026 Kiến Thức SOLA. All rights reserved.
-            </div>
-
-
-        </div>
-
-    </footer>
+</footer>
 
 
 </body>
