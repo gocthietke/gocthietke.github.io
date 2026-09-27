@@ -9,7 +9,7 @@
     body { font-family: Arial, sans-serif; max-width: 650px; margin: 40px auto; padding: 0 20px; line-height: 1.6; }
     .form-group { margin-bottom: 18px; }
     label { display: block; margin-bottom: 6px; font-weight: bold; color: #333; }
-    input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 15px; }
+    input[type="text"], select, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 15px; }
     button { padding: 12px 24px; background: #0070f3; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; }
     button:hover { background: #0051bb; }
   </style>
@@ -28,6 +28,16 @@
   </div>
 
   <div class="form-group">
+    <label for="category">Danh mục bài viết:</label>
+    <select id="category">
+      <option value="nha-cua">Nhà cửa</option>
+      <option value="gia-dung">Đồ gia dụng</option>
+      <option value="cong-nghe">Công nghệ</option>
+      <option value="review">Review</option>
+    </select>
+  </div>
+
+  <div class="form-group">
     <label for="cover_image">Link ảnh bìa (URL):</label>
     <input type="text" id="cover_image" placeholder="https://...">
   </div>
@@ -42,7 +52,7 @@
   <script>
     // 1. Cấu hình Supabase
     const SUPABASE_URL = 'https://youdayfwoygyudcgpkpf.supabase.co';
-    // LƯU Ý: Thay chuỗi bên dưới bằng Publishable key (sb_publishable_...) bạn đã copy
+    // LƯU Ý: Thay chuỗi bên dưới bằng Publishable key (sb_publishable_...) của bạn
     const SUPABASE_KEY = 'sb_publishable_b8rHawI1m1qFnSLjPMrSZw_oR_Tkwk7';
 
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -51,6 +61,7 @@
     async function publishPost() {
       const title = document.getElementById('title').value.trim();
       const slug = document.getElementById('slug').value.trim();
+      const category = document.getElementById('category').value;
       const cover_image = document.getElementById('cover_image').value.trim();
       const content = document.getElementById('content').value.trim();
 
@@ -65,6 +76,7 @@
           { 
             title: title, 
             slug: slug, 
+            category: category,
             cover_image: cover_image, 
             content: content, 
             published: true 
@@ -74,8 +86,8 @@
       if (error) {
         alert('Có lỗi xảy ra: ' + error.message);
       } else {
-        alert('Đăng bài thành công!');
-        // Xóa form sau khi đăng thành công
+        alert('Đăng bài thành công vào danh mục!');
+        // Xóa thông tin đã điền để chuẩn bị cho bài mới
         document.getElementById('title').value = '';
         document.getElementById('slug').value = '';
         document.getElementById('cover_image').value = '';
