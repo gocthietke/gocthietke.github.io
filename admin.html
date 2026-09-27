@@ -6,11 +6,12 @@
   <title>Trang Đăng Bài - Góc Thiết Kế</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 650px; margin: 40px auto; padding: 0 20px; line-height: 1.6; }
+    body { font-family: Arial, sans-serif; max-width: 650px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #333; }
+    h2 { border-bottom: 2px solid #0070f3; padding-bottom: 10px; }
     .form-group { margin-bottom: 18px; }
-    label { display: block; margin-bottom: 6px; font-weight: bold; color: #333; }
+    label { display: block; margin-bottom: 6px; font-weight: bold; }
     input[type="text"], select, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 15px; }
-    button { padding: 12px 24px; background: #0070f3; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; }
+    button { padding: 12px 24px; background: #0070f3; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; width: 100%; }
     button:hover { background: #0051bb; }
   </style>
 </head>
@@ -52,8 +53,7 @@
   <script>
     // 1. Cấu hình Supabase
     const SUPABASE_URL = 'https://youdayfwoygyudcgpkpf.supabase.co';
-    // LƯU Ý: Thay chuỗi bên dưới bằng Publishable key (sb_publishable_...) của bạn
-    const SUPABASE_KEY = 'sb_publishable_b8rHawI1m1qFnSLjPMrSZw_oR_Tkwk7';
+    const SUPABASE_KEY = 'sb_publishable_b8rHawI1mlqFnSLjPMrSZw_or_Tk...'; // Hãy kiểm tra và dán đầy đủ Publishable Key của bạn ở đây
 
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -87,7 +87,7 @@
         alert('Có lỗi xảy ra: ' + error.message);
       } else {
         alert('Đăng bài thành công vào danh mục!');
-        // Xóa thông tin đã điền để chuẩn bị cho bài mới
+        // Làm sạch form
         document.getElementById('title').value = '';
         document.getElementById('slug').value = '';
         document.getElementById('cover_image').value = '';
