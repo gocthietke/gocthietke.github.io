@@ -51,13 +51,11 @@
   <button onclick="publishPost()">Đăng bài viết</button>
 
   <script>
-    // 1. Cấu hình Supabase
     const SUPABASE_URL = 'https://youdayfwoygyudcgpkpf.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_b8rHawI1mlqFnSLjPMrSZw_or_Tk...'; // Hãy kiểm tra và dán đầy đủ Publishable Key của bạn ở đây
+    const SUPABASE_KEY = 'sb_publishable_b8rHawI1mlqFnSLjPMrSZw_or_Tk...'; // Nhớ kiểm tra xem đã có đầy đủ key sb_publishable chưa nhé
 
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    // 2. Hàm đăng bài viết lên Supabase
     async function publishPost() {
       const title = document.getElementById('title').value.trim();
       const slug = document.getElementById('slug').value.trim();
@@ -87,7 +85,6 @@
         alert('Có lỗi xảy ra: ' + error.message);
       } else {
         alert('Đăng bài thành công vào danh mục!');
-        // Làm sạch form
         document.getElementById('title').value = '';
         document.getElementById('slug').value = '';
         document.getElementById('cover_image').value = '';
