@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang Đăng Bài - Góc Thiết Kế</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 650px; margin: 40px auto; padding: 0 20px; line-height: 1.6; }
+    .form-group { margin-bottom: 18px; }
+    label { display: block; margin-bottom: 6px; font-weight: bold; color: #333; }
+    input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 15px; }
+    button { padding: 12px 24px; background: #0070f3; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; }
+    button:hover { background: #0051bb; }
+  </style>
+</head>
+<body>
+  <h2>Quản Lý Đăng Bài Viết Mới</h2>
+  
+  <div class="form-group">
+    <label for="title">Tiêu đề bài viết:</label>
+    <input type="text" id="title" placeholder="Nhập tiêu đề bài viết...">
+  </div>
+
+  <div class="form-group">
+    <label for="slug">Slug (Đường dẫn chuẩn SEO):</label>
+    <input type="text" id="slug" placeholder="vi-du-bai-viet-moi">
+  </div>
+
+  <div class="form-group">
+    <label for="cover_image">Link ảnh bìa (URL):</label>
+    <input type="text" id="cover_image" placeholder="https://...">
+  </div>
+
+  <div class="form-group">
+    <label for="content">Nội dung bài viết:</label>
+    <textarea id="content" rows="8" placeholder="Nhập nội dung bài viết vào đây..."></textarea>
+  </div>
+
+  <button onclick="publishPost()">Đăng bài viết</button>
+
+  <script>
+    // 1. Cấu hình Supabase
+    const SUPABASE_URL = 'https://youdayfwoygyudcgpkpf.supabase.co';
+    // LƯU Ý: Thay chuỗi bên dưới bằng Publishable key (sb_publishable_...) bạn đã copy
+    const SUPABASE_KEY = 'sb_publishable_b8rHawI1m1qFnSLjPMrSZw_oR_Tkwk7';
+
+    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // 2. Hàm đăng bài viết lên Supabase
+    async function publishPost() {
+      const title = document.getElementById('title').value.trim();
+      const slug = document.getElementById('slug').value.trim();
+      const cover_image = document.getElementById('cover_image').value.trim();
+      const content = document.getElementById('content').value.trim();
+
+      if (!title || !slug) {
+        alert('Vui lòng nhập đầy đủ Tiêu đề và Slug đường dẫn!');
+        return;
+      }
+
+      const { data, error } = await _supabase
+        .from('posts')
+        .insert([
+          { 
+            title: title, 
+            slug: slug, 
+            cover_image: cover_image, 
+            content: content, 
+            published: true 
+          }
+        ]);
+
+      if (error) {
+        alert('Có lỗi xảy ra: ' + error.message);
+      } else {
+        alert('Đăng bài thành công!');
+        // Xóa form sau khi đăng thành công
+        document.getElementById('title').value = '';
+        document.getElementById('slug').value = '';
+        document.getElementById('cover_image').value = '';
+        document.getElementById('content').value = '';
+      }
+    }
+  </script>
+</body>
+</html>
