@@ -44,6 +44,11 @@
   </div>
 
   <div class="form-group">
+    <label for="affiliate_link">Link Mua Hàng / Trỏ Đến Sản Phẩm (URL):</label>
+    <input type="text" id="affiliate_link" placeholder="https://shopee.vn/... hoặc link mua hàng">
+  </div>
+
+  <div class="form-group">
     <label for="content">Nội dung bài viết:</label>
     <textarea id="content" rows="8" placeholder="Nhập nội dung bài viết vào đây..."></textarea>
   </div>
@@ -51,16 +56,19 @@
   <button onclick="publishPost()">Đăng bài viết</button>
 
   <script>
+    // 1. Cấu hình Supabase chuẩn với Key của bạn
     const SUPABASE_URL = 'https://youdayfwoygyudcgpkpf.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_b8rHawI1mlqFnSLjPMrSZw_or_Tk...'; // Nhớ kiểm tra xem đã có đầy đủ key sb_publishable chưa nhé
+    const SUPABASE_KEY = 'sb_publishable_b8rHawI1m1qFnSLjPMrSZw_oR_Tkwk7';
 
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+    // 2. Hàm đăng bài viết lên Supabase
     async function publishPost() {
       const title = document.getElementById('title').value.trim();
       const slug = document.getElementById('slug').value.trim();
       const category = document.getElementById('category').value;
       const cover_image = document.getElementById('cover_image').value.trim();
+      const affiliate_link = document.getElementById('affiliate_link').value.trim();
       const content = document.getElementById('content').value.trim();
 
       if (!title || !slug) {
@@ -76,6 +84,7 @@
             slug: slug, 
             category: category,
             cover_image: cover_image, 
+            affiliate_link: affiliate_link,
             content: content, 
             published: true 
           }
@@ -84,10 +93,12 @@
       if (error) {
         alert('Có lỗi xảy ra: ' + error.message);
       } else {
-        alert('Đăng bài thành công vào danh mục!');
+        alert('Đăng bài thành công!');
+        // Làm sạch dữ liệu vừa nhập trên form
         document.getElementById('title').value = '';
         document.getElementById('slug').value = '';
         document.getElementById('cover_image').value = '';
+        document.getElementById('affiliate_link').value = '';
         document.getElementById('content').value = '';
       }
     }
