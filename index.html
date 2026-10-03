@@ -6,38 +6,57 @@
   <meta name="description" content="Kiến Thức SOLA — Góc nhìn thực tế cho không gian sống hiện đại.">
   <title>Kiến Thức SOLA</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Thư viện Icon FontAwesome -->
+  
+  <!-- Thư viện FontAwesome & Google Font Lora -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
   
   <style>
-    /* CSS bổ sung cho Chân trang Footer Branding */
+    /* STYLES CHO FOOTER MỚI */
     .site-footer {
-      background: linear-gradient(135deg, #2b0b14 0%, #150508 100%);
-      color: #f3e8e8;
+      background: linear-gradient(135deg, #1f080e 0%, #110306 100%);
+      color: #ffffff;
       padding: 50px 20px;
       margin-top: 80px;
-      border-top: 3px solid #8b263e;
+      border-top: 2px solid #3d141d;
     }
     .footer-container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 40px;
+      justify-content: space-between;
+      gap: 25px;
     }
+
+    /* 1. Logo chữ N vẽ bằng SVG bên trái */
+    .footer-logo-col {
+      flex: 0 0 140px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .svg-logo-n {
+      width: 110px;
+      height: 130px;
+    }
+
+    /* 2. Ảnh chân dung */
     .footer-profile-col {
-      flex: 0 0 280px;
+      flex: 0 0 180px;
       display: flex;
       justify-content: center;
     }
     .profile-frame {
-      width: 240px;
-      height: 320px;
-      border-radius: 120px 120px 12px 12px;
+      width: 160px;
+      height: 230px;
+      border-radius: 80px 80px 12px 12px;
       overflow: hidden;
-      border: 2px solid rgba(212, 175, 55, 0.5);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
     }
     .profile-frame img {
       width: 100%;
@@ -45,16 +64,24 @@
       object-fit: cover;
       object-position: top center;
     }
+
+    /* 3. Thông tin liên hệ */
     .footer-info-col {
-      flex: 1 1 320px;
+      flex: 1 1 280px;
+      font-family: 'Times New Roman', Times, serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: #f0e6e6;
     }
     .footer-header-title {
-      font-size: 1.25rem;
-      letter-spacing: 2px;
+      font-family: 'Lora', serif;
+      font-style: normal;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #ffd700; /* Vàng nét */
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: #d4af37;
-      margin-bottom: 20px;
-      font-weight: 600;
+      margin-bottom: 18px;
     }
     .contact-list {
       list-style: none;
@@ -64,93 +91,92 @@
     .contact-item {
       display: flex;
       align-items: flex-start;
-      gap: 15px;
-      margin-bottom: 14px;
-      font-size: 0.95rem;
-      color: #e5d5d5;
+      gap: 12px;
+      margin-bottom: 12px;
     }
     .contact-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #d4af37;
-      font-size: 0.9rem;
+      color: #ffd700;
+      font-size: 1rem;
+      margin-top: 3px;
       flex-shrink: 0;
     }
     .contact-text a {
-      color: #f3e8e8;
+      color: #f0e6e6;
       text-decoration: none;
     }
     .contact-text a:hover {
-      color: #d4af37;
+      color: #ffd700;
       text-decoration: underline;
     }
+
+    /* Vạch kẻ chia dọc */
     .footer-divider {
       width: 1px;
-      height: 220px;
+      height: 190px;
       background: rgba(255, 255, 255, 0.15);
     }
+
+    /* 4. Châm ngôn & Nút Facebook */
     .footer-quote-col {
       flex: 1 1 300px;
+      font-family: 'Times New Roman', Times, serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: #f0e6e6;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
     .quote-box {
       position: relative;
-      padding-left: 25px;
-      margin-bottom: 25px;
+      padding-left: 20px;
+      margin-bottom: 20px;
     }
     .quote-mark {
-      font-size: 3rem;
-      color: #d4af37;
+      font-size: 2.5rem;
+      color: #ffd700;
       position: absolute;
-      left: -10px;
-      top: -20px;
-      opacity: 0.4;
-      font-family: Georgia, serif;
+      left: -8px;
+      top: -15px;
+      opacity: 0.6;
     }
     .quote-text {
-      font-style: italic;
-      font-size: 0.98rem;
       line-height: 1.7;
-      color: #f0e6e6;
+      margin: 0;
     }
     .author-name {
       margin-top: 10px;
+      font-style: normal;
       font-weight: bold;
-      color: #d4af37;
-      font-size: 0.9rem;
-      text-align: right;
+      color: #ffd700;
+      font-size: 0.95rem;
     }
     .fb-card-link {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(212, 175, 55, 0.4);
-      padding: 10px 18px;
-      border-radius: 8px;
+      padding: 9px 18px;
+      border-radius: 6px;
       color: #ffffff;
       text-decoration: none;
+      font-style: normal;
+      font-family: sans-serif;
+      font-size: 0.9rem;
       transition: all 0.3s ease;
       width: fit-content;
     }
     .fb-card-link:hover {
       background: #1877f2;
       border-color: #1877f2;
-      transform: translateY(-2px);
     }
+
     @media (max-width: 900px) {
       .footer-container { flex-direction: column; text-align: center; gap: 30px; }
       .footer-divider { display: none; }
       .contact-item { justify-content: center; text-align: left; }
       .quote-box { padding-left: 0; }
-      .author-name { text-align: center; }
       .fb-card-link { margin: 0 auto; }
     }
   </style>
@@ -230,24 +256,39 @@
     </section>
   </main>
 
-  <!-- CHÂN TRANG FOOTER BRANDING MỚI -->
+  <!-- CHÂN TRANG FOOTER MỚI -->
   <footer class="site-footer">
     <div class="footer-container">
       
+      <!-- 1. Cột Logo chữ N nghệ thuật bằng SVG -->
+      <div class="footer-logo-col">
+        <svg class="svg-logo-n" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Đường dọc trái -->
+          <path d="M 20 20 L 20 100" stroke="#d4af37" stroke-width="4" stroke-linecap="round"/>
+          <!-- Đường dọc phải -->
+          <path d="M 80 35 L 80 100" stroke="#d4af37" stroke-width="4" stroke-linecap="round"/>
+          <!-- Dải uốn cong chữ N ở giữa -->
+          <path d="M 20 25 Q 50 70 80 95" stroke="#d4af37" stroke-width="3" fill="none"/>
+          <path d="M 50 15 Q 40 50 80 95" stroke="#d4af37" stroke-width="3" fill="none"/>
+          <!-- Dấu chấm trên đầu -->
+          <circle cx="50" cy="10" r="4" fill="#d4af37"/>
+        </svg>
+      </div>
+
+      <!-- 2. Cột Ảnh đại diện -->
       <div class="footer-profile-col">
         <div class="profile-frame">
           <img src="https://youdayfwoygyudcgpkpf.supabase.co/storage/v1/object/public/posts/DSC08182_(2).jpg" alt="Quỳnh Như">
         </div>
       </div>
 
+      <!-- 3. Cột Thông tin LET'S CONNECT -->
       <div class="footer-info-col">
         <div class="footer-header-title">LET'S CONNECT</div>
         <ul class="contact-list">
           <li class="contact-item">
             <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
-            <div class="contact-text">
-              <a href="mailto:nhunhu13061@gmail.com">nhunhu13061@gmail.com</a>
-            </div>
+            <div class="contact-text"><a href="mailto:nhunhu13061@gmail.com">nhunhu13061@gmail.com</a></div>
           </li>
           <li class="contact-item">
             <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
@@ -264,15 +305,14 @@
           </li>
           <li class="contact-item">
             <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
-            <div class="contact-text">
-              969 Trần Hưng Đạo, P. Quy Nhơn, T. Gia Lai
-            </div>
+            <div class="contact-text">969 Trần Hưng Đạo, P. Quy Nhơn, T. Gia Lai</div>
           </li>
         </ul>
       </div>
 
       <div class="footer-divider"></div>
 
+      <!-- 4. Cột Châm ngôn & Thẻ Facebook -->
       <div class="footer-quote-col">
         <div class="quote-box">
           <span class="quote-mark">“</span>
