@@ -6,14 +6,162 @@
   <meta name="description" content="Kiến Thức SOLA — Góc nhìn thực tế cho không gian sống hiện đại.">
   <title>Kiến Thức SOLA</title>
   <link rel="stylesheet" href="style.css">
+  <!-- Thư viện Icon FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* CSS bổ sung cho Chân trang Footer Branding */
+    .site-footer {
+      background: linear-gradient(135deg, #2b0b14 0%, #150508 100%);
+      color: #f3e8e8;
+      padding: 50px 20px;
+      margin-top: 80px;
+      border-top: 3px solid #8b263e;
+    }
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+    }
+    .footer-profile-col {
+      flex: 0 0 280px;
+      display: flex;
+      justify-content: center;
+    }
+    .profile-frame {
+      width: 240px;
+      height: 320px;
+      border-radius: 120px 120px 12px 12px;
+      overflow: hidden;
+      border: 2px solid rgba(212, 175, 55, 0.5);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+    .profile-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+    .footer-info-col {
+      flex: 1 1 320px;
+    }
+    .footer-header-title {
+      font-size: 1.25rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #d4af37;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      color: #e5d5d5;
+    }
+    .contact-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d4af37;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .contact-text a {
+      color: #f3e8e8;
+      text-decoration: none;
+    }
+    .contact-text a:hover {
+      color: #d4af37;
+      text-decoration: underline;
+    }
+    .footer-divider {
+      width: 1px;
+      height: 220px;
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .footer-quote-col {
+      flex: 1 1 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .quote-box {
+      position: relative;
+      padding-left: 25px;
+      margin-bottom: 25px;
+    }
+    .quote-mark {
+      font-size: 3rem;
+      color: #d4af37;
+      position: absolute;
+      left: -10px;
+      top: -20px;
+      opacity: 0.4;
+      font-family: Georgia, serif;
+    }
+    .quote-text {
+      font-style: italic;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: #f0e6e6;
+    }
+    .author-name {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #d4af37;
+      font-size: 0.9rem;
+      text-align: right;
+    }
+    .fb-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      padding: 10px 18px;
+      border-radius: 8px;
+      color: #ffffff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      width: fit-content;
+    }
+    .fb-card-link:hover {
+      background: #1877f2;
+      border-color: #1877f2;
+      transform: translateY(-2px);
+    }
+    @media (max-width: 900px) {
+      .footer-container { flex-direction: column; text-align: center; gap: 30px; }
+      .footer-divider { display: none; }
+      .contact-item { justify-content: center; text-align: left; }
+      .quote-box { padding-left: 0; }
+      .author-name { text-align: center; }
+      .fb-card-link { margin: 0 auto; }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="#" aria-label="Kiến Thức SOLA">Kiến Thức <span>SOLA</span></a>
+      <a class="brand" href="index.html" aria-label="Kiến Thức SOLA">Kiến Thức <span>SOLA</span></a>
 
       <nav class="main-nav" aria-label="Điều hướng chính">
-        <a class="active" href="#">Trang chủ</a>
+        <a class="active" href="index.html">Trang chủ</a>
         <a href="#nha-cua">Nhà cửa</a>
         <a href="#gia-dung">Gia dụng</a>
         <a href="#cong-nghe">Công nghệ</a>
@@ -82,12 +230,65 @@
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div><strong>Kiến Thức SOLA</strong><p>Góc nhìn thực tế cho không gian sống hiện đại.</p></div>
-      <div class="footer-links"><a href="#">Trang chủ</a><a href="#nha-cua">Nhà cửa</a><a href="#gia-dung">Gia dụng</a><a href="#cong-nghe">Công nghệ</a><a href="#review">Review</a></div>
+  <!-- CHÂN TRANG FOOTER BRANDING MỚI -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      
+      <div class="footer-profile-col">
+        <div class="profile-frame">
+          <img src="https://youdayfwoygyudcgpkpf.supabase.co/storage/v1/object/public/posts/DSC08182_(2).jpg" alt="Quỳnh Như">
+        </div>
+      </div>
+
+      <div class="footer-info-col">
+        <div class="footer-header-title">LET'S CONNECT</div>
+        <ul class="contact-list">
+          <li class="contact-item">
+            <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div class="contact-text">
+              <a href="mailto:nhunhu13061@gmail.com">nhunhu13061@gmail.com</a>
+            </div>
+          </li>
+          <li class="contact-item">
+            <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+            <div class="contact-text">
+              Hotline 1: <a href="tel:0912539316">0912 539 316</a> (Ms. Như)<br>
+              Hotline 2: <a href="tel:0989780177">0989 780 177</a> (Ms. Như)
+            </div>
+          </li>
+          <li class="contact-item">
+            <div class="contact-icon"><i class="fa-solid fa-comment-dots"></i></div>
+            <div class="contact-text">
+              Tư vấn thiết kế & xây dựng (Zalo): <a href="https://zalo.me/0912539316" target="_blank">0912 539 316</a>
+            </div>
+          </li>
+          <li class="contact-item">
+            <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="contact-text">
+              969 Trần Hưng Đạo, P. Quy Nhơn, T. Gia Lai
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-quote-col">
+        <div class="quote-box">
+          <span class="quote-mark">“</span>
+          <p class="quote-text">
+            Tôi không dám nói mình biết tất cả, nhưng những gì đã trải qua, tôi muốn chia sẻ để khách hàng bớt mất tiền vì những điều không đáng.
+          </p>
+          <div class="author-name">— QUỲNH NHƯ —</div>
+        </div>
+
+        <a href="https://www.facebook.com/quynh.nhu.674793?locale=vi_VN" target="_blank" class="fb-card-link">
+          <i class="fa-brands fa-facebook"></i>
+          <span>Kết nối qua Facebook</span>
+        </a>
+      </div>
+
     </div>
-    <div class="copyright">© 2026 Kiến Thức SOLA. All rights reserved.</div>
   </footer>
 </body>
 </html>
