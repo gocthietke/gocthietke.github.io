@@ -5,14 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chi Tiết Bài Viết - Kiến Thức SOLA</title>
   
+  <!-- Supabase & Marked JS -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+  <!-- Font Awesome & Google Fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
 
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     body { 
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
       margin: 0; 
@@ -29,9 +36,10 @@
     }
 
     .post-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 15px; color: #111; line-height: 1.3; }
-    .post-meta { font-size: 0.9rem; color: #666; margin-bottom: 25px; }
+    .post-meta { font-size: 0.9rem; color: #666; margin-bottom: 25px; display: flex; gap: 15px; flex-wrap: wrap; }
     .cover-img { width: 100%; max-height: 480px; object-fit: cover; border-radius: 10px; margin-bottom: 25px; }
 
+    /* TOC STYLES */
     .toc-box {
       background-color: #f8f9fa;
       border: 1px solid #e5e7eb;
@@ -55,12 +63,26 @@
     .toc-list a { color: #2563eb; text-decoration: none; }
     .toc-list a:hover { text-decoration: underline; }
 
+    /* CONTENT STYLES */
     #post-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 20px 0; display: block; }
-    #post-content h2 { font-size: 1.5rem; margin-top: 35px; border-bottom: 1px solid #eee; padding-bottom: 8px; color: #111; scroll-margin-top: 20px; }
-    #post-content h3 { font-size: 1.25rem; margin-top: 25px; color: #333; scroll-margin-top: 20px; }
-    #post-content p { margin-bottom: 18px; font-size: 1.05rem; }
-    
-    .affiliate-btn { display: inline-block; background: #ee4d2d; color: white; padding: 12px 26px; border-radius: 6px; text-decoration: none; font-weight: bold; margin: 25px 0; transition: 0.2s; }
+    #post-content h2 { font-size: 1.5rem; margin-top: 35px; border-bottom: 1px solid #eee; padding-bottom: 8px; color: #111; scroll-margin-top: 30px; }
+    #post-content h3 { font-size: 1.25rem; margin-top: 25px; color: #333; scroll-margin-top: 30px; }
+    #post-content p { margin-bottom: 18px; font-size: 1.05rem; word-break: break-word; }
+    #post-content blockquote { border-left: 4px solid #ee4d2d; margin: 20px 0; padding-left: 15px; color: #555; font-style: italic; }
+
+    .affiliate-btn { 
+      display: inline-flex; 
+      align-items: center;
+      gap: 8px;
+      background: #ee4d2d; 
+      color: white; 
+      padding: 12px 26px; 
+      border-radius: 6px; 
+      text-decoration: none; 
+      font-weight: bold; 
+      margin: 25px 0; 
+      transition: background 0.2s; 
+    }
     .affiliate-btn:hover { background: #d73211; }
 
     /* FOOTER STYLES */
@@ -210,16 +232,18 @@
   <div class="main-container">
     <h1 id="title" class="post-title">Đang tải bài viết...</h1>
     <div id="meta" class="post-meta"></div>
-    <img id="cover" class="cover-img" style="display:none;" alt="Ảnh bìa">
+    <img id="cover" class="cover-img" style="display:none;" alt="Ảnh bìa bài viết">
     
+    <!-- Table of contents -->
     <div id="toc-container" class="toc-box" style="display:none;">
       <div class="toc-title">
         <i class="fa-solid fa-list-ol"></i>
-        <span>Contents</span>
+        <span>Mục lục bài viết</span>
       </div>
       <ul id="toc-list" class="toc-list"></ul>
     </div>
 
+    <!-- Article Content -->
     <div id="post-content"></div>
     <div id="affiliate-container"></div>
   </div>
@@ -285,40 +309,64 @@
 
     async function loadPost() {
       if (!postSlug) {
-        document.getElementById('title').innerText = "Vui lòng chọn bài viết!";
+        document.getElementById('title').innerText = "Vui lòng chọn bài viết hợp lệ!";
         return;
       }
 
-      const { data: posts, error } = await _supabase
-        .from('posts')
-        .select('*')
-        .eq('slug', postSlug)
-        .single();
+      try {
+        const { data: post, error } = await _supabase
+          .from('posts')
+          .select('*')
+          .eq('slug', postSlug)
+          .single();
 
-      if (error || !posts) {
-        document.getElementById('title').innerText = "Không tìm thấy bài viết!";
-        return;
-      }
+        if (error || !post) {
+          document.getElementById('title').innerText = "Không tìm thấy bài viết!";
+          return;
+        }
 
-      document.getElementById('title').innerText = posts.title;
-      document.getElementById('meta').innerText = `Danh mục: ${posts.category} | Ngày đăng: ${new Date(posts.created_at).toLocaleDateString('vi-VN')}`;
+        // 1. Cập nhật Tiêu đề trang & Meta Title
+        document.title = `${post.title} - Kiến Thức SOLA`;
+        document.getElementById('title').innerText = post.title;
 
-      if (posts.cover_image) {
-        const coverEl = document.getElementById('cover');
-        coverEl.src = posts.cover_image;
-        coverEl.style.display = 'block';
-      }
-
-      const rawHtml = marked.parse(posts.content || '');
-      const contentEl = document.getElementById('post-content');
-      contentEl.innerHTML = rawHtml;
-
-      generateTableOfContents(contentEl);
-
-      if (posts.affiliate_link) {
-        document.getElementById('affiliate-container').innerHTML = `
-          <a href="${posts.affiliate_link}" target="_blank" class="affiliate-btn">🛒 Xem sản phẩm / Mua ngay</a>
+        // 2. Cập nhật Meta Info
+        const postDate = new Date(post.created_at).toLocaleDateString('vi-VN', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+        document.getElementById('meta').innerHTML = `
+          <span><i class="fa-regular fa-folder"></i> ${post.category || 'Chia sẻ'}</span>
+          <span><i class="fa-regular fa-calendar-alt"></i> ${postDate}</span>
         `;
+
+        // 3. Ảnh Bìa
+        if (post.cover_image) {
+          const coverEl = document.getElementById('cover');
+          coverEl.src = post.cover_image;
+          coverEl.alt = post.title;
+          coverEl.style.display = 'block';
+        }
+
+        // 4. Parse Markdown -> HTML
+        const rawHtml = marked.parse(post.content || '');
+        const contentEl = document.getElementById('post-content');
+        contentEl.innerHTML = rawHtml;
+
+        // 5. Tự động tạo Mục lục (Table of Contents)
+        generateTableOfContents(contentEl);
+
+        // 6. Nút Affiliate Link
+        if (post.affiliate_link) {
+          document.getElementById('affiliate-container').innerHTML = `
+            <a href="${post.affiliate_link}" target="_blank" rel="nofollow sponsored" class="affiliate-btn">
+              <i class="fa-solid fa-cart-shopping"></i> Xem sản phẩm / Mua ngay
+            </a>
+          `;
+        }
+      } catch (err) {
+        console.error('Lỗi khi tải bài viết:', err);
+        document.getElementById('title').innerText = "Có lỗi xảy ra khi tải bài viết!";
       }
     }
 
