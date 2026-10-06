@@ -245,11 +245,8 @@
     <section class="latest section">
       <div class="container">
         <h2>Bài viết mới nhất</h2>
-        <div class="article-grid">
-          <article class="article-card"><div class="article-photo photo-1"></div><div class="article-body"><span>NHÀ CỬA</span><h3>Những điều cần biết trước khi thiết kế không gian sống</h3><p>Những kinh nghiệm thực tế giúp gia chủ lựa chọn giải pháp phù hợp.</p><a href="#">Đọc bài viết →</a></div></article>
-          <article class="article-card"><div class="article-photo photo-2"></div><div class="article-body"><span>GIA DỤNG</span><h3>Có nên đầu tư thiết bị gia dụng cao cấp?</h3><p>Những yếu tố cần cân nhắc trước khi lựa chọn thiết bị cho gia đình.</p><a href="#">Đọc bài viết →</a></div></article>
-          <article class="article-card"><div class="article-photo photo-3"></div><div class="article-body"><span>CÔNG NGHỆ</span><h3>Những thiết bị công nghệ đáng chú ý cho gia đình</h3><p>Tổng hợp những thiết bị đáng quan tâm trong không gian sống hiện đại.</p><a href="#">Đọc bài viết →</a></div></article>
-          <article class="article-card"><div class="article-photo photo-4"></div><div class="article-body"><span>REVIEW</span><h3>Review nội thất: Đẹp thôi chưa đủ</h3><p>Cùng nhìn vào chất lượng, công năng, độ bền và giá trị sử dụng thực tế.</p><a href="#">Đọc bài viết →</a></div></article>
+        <div class="article-grid" id="article-grid">
+          <p style="grid-column: 1/-1; text-align: center; color: #888; padding: 20px;">Đang tải bài viết...</p>
         </div>
       </div>
     </section>
@@ -320,6 +317,64 @@
 
     </div>
   </footer>
+
+  <!-- THƯ VIỆN & SCRIPT LOAD BÀI VIẾT TỪ SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'https://youdayfwoygyudcgpkpf.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_b8rHawI1m1qFnSLjPMrSZw_oR_Tkwk7';
+
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    async function loadLatestPosts() {
+      const container = document.getElementById('article-grid');
+      if (!container) return;
+
+      const { data: posts, error } = await supabaseClient
+        .from('posts')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Lỗi lấy bài viết:', error);
+        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #d9534f;">Không thể tải danh sách bài viết. Vui lòng kiểm tra lại kết nối!</p>';
+        return;
+      }
+
+      if (!posts || posts.length === 0) {
+        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666;">Chưa có bài viết nào được xuất bản.</p>';
+        return;
+      }
+
+      container.innerHTML = posts.map(post => {
+        const coverImg = post.cover_image || 'https://via.placeholder.com/600x400?text=Kien+Thuc+SOLA';
+        const categoryName = (post.category || 'BÀI VIẾT').toUpperCase();
+        
+        // Làm sạch thẻ HTML để lấy mô tả ngắn gọn
+        let rawSummary = post.summary || post.content || '';
+        let cleanSummary = rawSummary.replace(/<[^>]*>?/gm, '').trim();
+        if (cleanSummary.length > 90) {
+          cleanSummary = cleanSummary.substring(0, 90) + '...';
+        }
+
+        const postLink = post.slug ? `post.html?slug=${post.slug}` : `post.html?id=${post.id}`;
+
+        return `
+          <article class="article-card">
+            <div class="article-photo" style="background-image: url('${coverImg}'); background-size: cover; background-position: center; min-height: 200px; border-radius: 8px 8px 0 0;"></div>
+            <div class="article-body">
+              <span>${categoryName}</span>
+              <h3>${post.title}</h3>
+              <p>${cleanSummary}</p>
+              <a href="${postLink}">Đọc bài viết →</a>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', loadLatestPosts);
+  </script>
 
 </body>
 </html>
