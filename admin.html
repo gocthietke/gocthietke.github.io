@@ -1,107 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trang Đăng Bài - Góc Thiết Kế</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#f7f5f0">
+  <title>Quản trị nội dung | SOLA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 650px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #333; }
-    h2 { border-bottom: 2px solid #0070f3; padding-bottom: 10px; }
-    .form-group { margin-bottom: 18px; }
-    label { display: block; margin-bottom: 6px; font-weight: bold; }
-    input[type="text"], select, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 15px; }
-    button { padding: 12px 24px; background: #0070f3; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; width: 100%; }
-    button:hover { background: #0051bb; }
-  </style>
+  <script src="config.js"></script>
+  <script src="app.js" defer></script>
+  <script src="admin.js" defer></script>
 </head>
-<body>
-  <h2>Quản Lý Đăng Bài Viết Mới</h2>
-  
-  <div class="form-group">
-    <label for="title">Tiêu đề bài viết:</label>
-    <input type="text" id="title" placeholder="Nhập tiêu đề bài viết...">
-  </div>
+<body class="admin-page">
+  <main class="admin-shell">
+    <div class="admin-top">
+      <div><h1>Quản trị SOLA</h1><p>Quản lý bài viết, ảnh bìa và các liên kết Affiliate.</p></div>
+      <a class="back-link" href="index.html">← Xem website</a>
+    </div>
 
-  <div class="form-group">
-    <label for="slug">Slug (Đường dẫn chuẩn SEO):</label>
-    <input type="text" id="slug" placeholder="vi-du-bai-viet-moi">
-  </div>
+    <section id="login-panel" class="admin-card admin-login">
+      <h2>Đăng nhập quản trị</h2>
+      <p class="admin-help">Chỉ tài khoản quản trị được cấp quyền trong Supabase mới có thể đăng, sửa hoặc xóa bài viết.</p>
+      <form id="login-form">
+        <div class="form-field"><label for="login-email">Email quản trị</label><input type="email" id="login-email" autocomplete="username" required></div>
+        <div class="form-field"><label for="login-password">Mật khẩu</label><input type="password" id="login-password" autocomplete="current-password" required></div>
+        <button class="admin-button" id="login-button" type="submit">Đăng nhập</button>
+        <p id="login-message" class="admin-message" role="status"></p>
+      </form>
+      <p class="admin-help">Nếu chưa có tài khoản, hãy tạo người dùng quản trị trong Supabase Authentication → Users. Không bật đăng ký công khai.</p>
+    </section>
 
-  <div class="form-group">
-    <label for="category">Danh mục bài viết:</label>
-    <select id="category">
-      <option value="nha-cua">Nhà cửa</option>
-      <option value="gia-dung">Đồ gia dụng</option>
-      <option value="cong-nghe">Công nghệ</option>
-      <option value="review">Review</option>
-    </select>
-  </div>
+    <section id="dashboard" hidden>
+      <div class="stats-grid" aria-label="Thống kê website">
+        <div class="stat-card"><span>BÀI VIẾT</span><strong id="stat-total-posts">—</strong><small>Tổng số bài đang quản lý</small></div>
+        <div class="stat-card"><span>ĐÃ XUẤT BẢN</span><strong id="stat-live-posts">—</strong><small>Bài đang hiển thị công khai</small></div>
+        <div class="stat-card"><span>CLICK AFFILIATE</span><strong id="stat-clicks">—</strong><small>Lượt nhấn trong 30 ngày gần nhất</small></div>
+      </div>
+      <div class="admin-card">
+        <div class="admin-top"><div><h2 id="editor-heading">Viết bài mới</h2><p class="admin-help">Nội dung được lưu vào bảng <code>posts</code> đang sử dụng.</p></div><button class="admin-button secondary" id="logout-button" type="button">Đăng xuất</button></div>
+        <form id="post-form">
+          <input type="hidden" id="post-id">
+          <div class="admin-form-grid">
+            <div class="form-field full"><label for="post-title-input">Tiêu đề bài viết *</label><input type="text" id="post-title-input" maxlength="180" placeholder="Ví dụ: Nên thiết kế nhà trước khi xây dựng bao nhiêu tháng?" required></div>
+            <div class="form-field"><label for="post-slug">Đường dẫn SEO (slug) *</label><input type="text" id="post-slug" maxlength="180" placeholder="nen-thiet-ke-nha-truoc-khi-xay-dung" required><span class="hint">Tự tạo từ tiêu đề. Có thể chỉnh sửa nhưng không nên đổi sau khi đã chia sẻ link.</span></div>
+            <div class="form-field"><label for="post-category">Chuyên mục</label><select id="post-category"><option value="nha-cua">Nhà cửa</option><option value="vat-lieu">Vật liệu</option><option value="gia-dung">Gia dụng</option><option value="cong-nghe">Công nghệ</option><option value="review">Review</option><option value="kien-thuc">Kiến thức</option></select></div>
+            <div class="form-field full"><label for="post-summary-input">Mô tả ngắn / đoạn dẫn</label><textarea id="post-summary-input" rows="3" placeholder="Tóm tắt bài viết trong 1–3 câu. Nội dung này hiển thị trên thẻ bài và phần giới thiệu."></textarea></div>
+            <div class="form-field full"><label for="post-cover-url">URL ảnh bìa</label><input type="url" id="post-cover-url" placeholder="https://..."><span class="hint">Có thể dán URL công khai từ Supabase Storage hoặc tải ảnh ở bên dưới.</span></div>
+            <div class="form-field full"><label for="post-cover-file">Tải ảnh bìa lên Storage</label><input type="file" id="post-cover-file" accept="image/*"><span class="hint">Ảnh sẽ được lưu vào bucket công khai tên <strong>posts</strong>. Nên dùng ảnh WebP/JPG đã nén, ngang khoảng 1200 px.</span><div id="cover-upload-message" class="hint"></div></div>
+            <div class="form-field full"><label for="post-content-input">Nội dung bài viết *</label><textarea id="post-content-input" rows="18" placeholder="# Tiêu đề chính\n\nViết nội dung tại đây. Có thể dùng Markdown:\n\n## Tiêu đề mục\nĐoạn văn...\n\n- Ý thứ nhất\n- Ý thứ hai\n\n![Mô tả ảnh](URL_ẢNH)" required></textarea><span class="hint">Hỗ trợ Markdown: ## tiêu đề, **in đậm**, danh sách, bảng, trích dẫn và ảnh theo cú pháp ![mô tả](URL).</span></div>
+            <div class="form-field full"><label for="legacy-affiliate">Link Affiliate cũ (tùy chọn)</label><input type="url" id="legacy-affiliate" placeholder="https://shopee.vn/... hoặc https://www.tiktok.com/..."><span class="hint">Giữ tương thích với những bài cũ. Bài mới nên thêm từng sản phẩm ở phần bên dưới.</span></div>
+            <div class="form-field full"><label class="inline-check"><input type="checkbox" id="post-published" checked> Xuất bản ngay sau khi lưu</label></div>
+          </div>
 
-  <div class="form-group">
-    <label for="cover_image">Link ảnh bìa (URL):</label>
-    <input type="text" id="cover_image" placeholder="https://...">
-  </div>
+          <div class="product-editor">
+            <div class="product-editor-top"><div><strong>Sản phẩm / liên kết tiếp thị</strong><div class="hint">Một bài viết có thể giới thiệu nhiều sản phẩm, mỗi sản phẩm có link Shopee và TikTok Shop riêng.</div></div><button class="admin-button secondary" type="button" id="add-product-button">+ Thêm sản phẩm</button></div>
+            <div id="product-editor-list"></div>
+          </div>
 
-  <div class="form-group">
-    <label for="affiliate_link">Link Mua Hàng / Trỏ Đến Sản Phẩm (URL):</label>
-    <input type="text" id="affiliate_link" placeholder="https://shopee.vn/... hoặc link mua hàng">
-  </div>
+          <div class="admin-actions"><button class="admin-button" id="save-post-button" type="submit">Lưu bài viết</button><button class="admin-button secondary" id="reset-form-button" type="button">Viết bài mới / Làm trống</button></div>
+          <p id="save-message" class="admin-message" role="status"></p>
+        </form>
+      </div>
 
-  <div class="form-group">
-    <label for="content">Nội dung bài viết:</label>
-    <textarea id="content" rows="8" placeholder="Nhập nội dung bài viết vào đây..."></textarea>
-  </div>
-
-  <button onclick="publishPost()">Đăng bài viết</button>
-
-  <script>
-    // 1. Cấu hình Supabase chuẩn với Key của bạn
-    const SUPABASE_URL = 'https://youdayfwoygyudcgpkpf.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_b8rHawI1m1qFnSLjPMrSZw_oR_Tkwk7';
-
-    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-    // 2. Hàm đăng bài viết lên Supabase
-    async function publishPost() {
-      const title = document.getElementById('title').value.trim();
-      const slug = document.getElementById('slug').value.trim();
-      const category = document.getElementById('category').value;
-      const cover_image = document.getElementById('cover_image').value.trim();
-      const affiliate_link = document.getElementById('affiliate_link').value.trim();
-      const content = document.getElementById('content').value.trim();
-
-      if (!title || !slug) {
-        alert('Vui lòng nhập đầy đủ Tiêu đề và Slug đường dẫn!');
-        return;
-      }
-
-      const { data, error } = await _supabase
-        .from('posts')
-        .insert([
-          { 
-            title: title, 
-            slug: slug, 
-            category: category,
-            cover_image: cover_image, 
-            affiliate_link: affiliate_link,
-            content: content, 
-            published: true 
-          }
-        ]);
-
-      if (error) {
-        alert('Có lỗi xảy ra: ' + error.message);
-      } else {
-        alert('Đăng bài thành công!');
-        // Làm sạch dữ liệu vừa nhập trên form
-        document.getElementById('title').value = '';
-        document.getElementById('slug').value = '';
-        document.getElementById('cover_image').value = '';
-        document.getElementById('affiliate_link').value = '';
-        document.getElementById('content').value = '';
-      }
-    }
-  </script>
+      <div class="admin-toolbar"><div><h2>Danh sách bài viết</h2><p class="admin-help">Bản nháp chỉ hiển thị trong trang quản trị, không hiện trên website công khai.</p><button class="admin-button secondary" id="download-sitemap-button" type="button">Tải sitemap mới</button></div><input id="admin-search" type="search" placeholder="Tìm bài viết..."></div>
+      <div id="admin-post-list" class="admin-post-list"><div class="loading-state">Đang tải danh sách...</div></div>
+      <p id="list-message" class="admin-message" role="status"></p>
+    </section>
+  </main>
 </body>
 </html>

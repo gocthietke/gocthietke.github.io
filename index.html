@@ -1,380 +1,131 @@
 <!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Kiến Thức SOLA — Góc nhìn thực tế cho không gian sống hiện đại.">
-  <title>Kiến Thức SOLA</title>
-  <link rel="stylesheet" href="style.css">
-  
-  <!-- Google Font Lora -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f5f0">
+  <meta name="description" content="Góc Thiết Kế SOLA – Góc nhìn người làm nghề về kiến trúc, nội thất, vật liệu, gia dụng và sản phẩm cho tổ ấm.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Góc Thiết Kế | SOLA">
+  <meta property="og:description" content="Góc nhìn người làm nghề – So sánh chuẩn, chọn đúng cho tổ ấm.">
+  <meta property="og:url" content="https://gocthietke.github.io/">
+  <title>Góc Thiết Kế | SOLA</title>
+  <link rel="canonical" href="https://gocthietke.github.io/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-  
-  <style>
-    /* ========================================== */
-    /* CSS CHUẨN CHO FOOTER                       */
-    /* ========================================== */
-    .site-footer {
-      background-color: #1a080c;
-      color: #ffffff;
-      padding: 45px 20px;
-      margin-top: 60px;
-      border-top: 1px solid #331218;
-    }
-    .footer-container {
-      max-width: 1240px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    /* 1. Logo chữ N không ô vuông - dịch sang trái */
-    .footer-logo-standalone {
-      width: 90px;
-      height: 140px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      flex-shrink: 0;
-      margin-left: -15px;
-    }
-    .logo-n-custom {
-      width: 85px;
-      height: 110px;
-      display: block;
-    }
-
-    /* 2. Khung ảnh chân dung */
-    .footer-avatar-frame {
-      width: 135px;
-      height: 190px;
-      border-radius: 70px 70px 10px 10px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      flex-shrink: 0;
-    }
-    .footer-avatar-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* 3. Thông tin liên hệ */
-    .footer-contact-box {
-      flex: 1.2;
-      font-family: 'Times New Roman', Times, serif;
-      font-style: italic;
-      font-size: 15px;
-      line-height: 1.7;
-      color: #e0e0e0;
-    }
-    .title-connect-lora {
-      font-family: 'Lora', serif;
-      font-style: normal;
-      font-weight: 700;
-      font-size: 18px;
-      color: #ffffff;
-      letter-spacing: 1.5px;
-      margin-bottom: 12px;
-      text-transform: uppercase;
-    }
-    .contact-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 6px;
-      color: #e0e0e0;
-    }
-    .svg-icon {
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
-      opacity: 0.9;
-    }
-    .svg-icon-sm {
-      width: 16px;
-      height: 16px;
-      flex-shrink: 0;
-    }
-    .text-light, .contact-row a {
-      color: #ffffff !important;
-      text-decoration: none;
-      opacity: 0.9;
-      transition: opacity 0.2s ease;
-    }
-    .contact-row a:hover {
-      opacity: 1;
-      text-decoration: underline;
-    }
-
-    /* Vạch ngăn cách dọc */
-    .footer-v-line {
-      width: 1px;
-      height: 150px;
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    /* 4. Trích dẫn & Nút Facebook */
-    .footer-quote-box {
-      flex: 1.1;
-      font-family: 'Times New Roman', Times, serif;
-      font-style: italic;
-      font-size: 15px;
-      line-height: 1.6;
-      color: #e0e0e0;
-    }
-    .quote-content {
-      position: relative;
-      padding-left: 18px;
-      margin-bottom: 10px;
-    }
-    .quote-content::before {
-      content: "“";
-      font-size: 32px;
-      color: #ffffff;
-      position: absolute;
-      left: 0;
-      top: -8px;
-      font-style: normal;
-    }
-    .author-tag {
-      color: #ffffff;
-      font-weight: bold;
-      font-style: normal;
-      font-size: 13px;
-      margin-bottom: 15px;
-      display: block;
-      letter-spacing: 1px;
-    }
-    .btn-fb-connect {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      color: #ffffff;
-      padding: 8px 16px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-family: sans-serif;
-      font-style: normal;
-      font-size: 13px;
-      transition: background 0.3s;
-    }
-    .btn-fb-connect:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    @media (max-width: 850px) {
-      .footer-container { flex-direction: column; text-align: center; }
-      .footer-logo-standalone { margin-left: 0; justify-content: center; }
-      .footer-v-line { display: none; }
-      .contact-row { justify-content: center; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js" defer></script>
+  <script src="home.js" defer></script>
 </head>
-<body>
-
-  <!-- HEADER -->
+<body class="home-page">
+  <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+  <div class="top-strip"><div class="container top-strip-inner"><span>GÓC NHÌN NGƯỜI LÀM NGHỀ</span><span>Kiến thức thực tế cho một tổ ấm bền vững</span></div></div>
   <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="index.html" aria-label="Kiến Thức SOLA">Kiến Thức <span>SOLA</span></a>
-
-      <nav class="main-nav" aria-label="Điều hướng chính">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Góc Thiết Kế SOLA"><span class="brand-mark">G</span><span class="brand-word">Góc Thiết Kế<small>SOLA · LIVING WITH INTENTION</small></span></a>
+      <button class="mobile-menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
+      <nav class="main-nav" id="main-nav" aria-label="Điều hướng chính">
         <a class="active" href="index.html">Trang chủ</a>
-        <a href="#nha-cua">Nhà cửa</a>
-        <a href="#gia-dung">Gia dụng</a>
-        <a href="#cong-nghe">Công nghệ</a>
-        <a href="#review">Review</a>
+        <a href="#danh-muc">Chuyên mục</a>
+        <a href="#bai-viet">Bài viết</a>
+        <a href="affiliate-disclosure.html">Minh bạch Affiliate</a>
       </nav>
     </div>
   </header>
 
-  <!-- NỘI DUNG CHÍNH -->
-  <main>
-    <section class="hero" aria-label="Giới thiệu">
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <h1>Góc nhìn người làm nghề –<br>So sánh chuẩn, chọn đúng cho tổ ấm.</h1>
-          <span class="hero-line"></span>
-          <p>Review thực tế vật liệu, công nghệ &amp; nội thất giúp gia chủ tự tin xuống tiền<br class="desktop-only"> đúng chỗ.</p>
-        </div>
+  <main id="main-content">
+    <section class="hero-section">
+      <div class="hero-photo" role="img" aria-label="Không gian nội thất ấm áp, tinh giản"></div>
+      <div class="hero-shade"></div>
+      <div class="container hero-content">
+        <p class="eyebrow light">KIẾN THỨC · TRẢI NGHIỆM · LỰA CHỌN</p>
+        <h1>Góc nhìn người làm nghề –<br><em>So sánh chuẩn, chọn đúng</em> cho tổ ấm.</h1>
+        <p class="hero-description">Từ kiến trúc, nội thất đến vật liệu và đồ dùng gia đình – cùng bạn hiểu rõ trước khi lựa chọn.</p>
+        <a class="button button-light" href="#bai-viet">Khám phá bài viết <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="hero-note"><span>01 / 06</span><span>THIẾT KẾ · KHÔNG GIAN SỐNG</span></div>
+    </section>
+
+    <section class="intro-band">
+      <div class="container intro-inner">
+        <p class="eyebrow">GÓC THIẾT KẾ SOLA</p>
+        <p class="intro-statement">Không chỉ đẹp trên hình ảnh. Một lựa chọn tốt cần phù hợp với <strong>nhu cầu, ngân sách và cách sống</strong> của gia đình.</p>
+        <p class="intro-side">Chia sẻ độc lập, dễ hiểu và có góc nhìn thực tế từ người làm nghề.</p>
       </div>
     </section>
 
-    <section class="categories section">
+    <section class="section category-section" id="danh-muc">
       <div class="container">
-        <h2>Khám phá theo danh mục</h2>
-
+        <div class="section-heading">
+          <div><p class="eyebrow">KHÁM PHÁ</p><h2>Chọn góc nhìn bạn đang cần</h2></div>
+          <p class="section-subtitle">Mỗi chuyên mục là một bước nhỏ giúp bạn hiểu hơn về ngôi nhà của mình.</p>
+        </div>
         <div class="category-grid">
-          <a class="category-card" id="nha-cua" href="#">
-            <span class="icon icon-home" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M3.5 10.5 12 3l8.5 7.5M5.5 9.5V20h13V9.5M9 20v-6h6v6"/></svg>
-            </span>
-            <span><strong>Nhà cửa</strong><small>Đồ dùng và sản phẩm cho không gian sống.</small></span>
-          </a>
-
-          <a class="category-card" id="gia-dung" href="#">
-            <span class="icon icon-homeapp" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="10" rx="1.5"/><path d="M8 8V6h8v2M7 18v2M17 18v2"/></svg>
-            </span>
-            <span><strong>Đồ gia dụng</strong><small>Đánh giá và so sánh thiết bị gia đình.</small></span>
-          </a>
-
-          <a class="category-card" id="cong-nghe" href="#">
-            <span class="icon icon-tech" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M9 20h6M12 16v4"/></svg>
-            </span>
-            <span><strong>Công nghệ</strong><small>Thiết bị công nghệ và phụ kiện đáng chú ý.</small></span>
-          </a>
-
-          <a class="category-card" id="review" href="#">
-            <span class="icon icon-review" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 5 5"/></svg>
-            </span>
-            <span><strong>Review</strong><small>Phân tích ưu nhược điểm trước khi mua.</small></span>
-          </a>
+          <button class="category-tile" type="button" data-category="nha-cua"><span class="category-number">01</span><span class="category-icon">⌂</span><strong>Nhà cửa</strong><small>Giải pháp không gian và những điều cần biết khi làm nhà.</small><span class="tile-arrow">↗</span></button>
+          <button class="category-tile" type="button" data-category="vat-lieu"><span class="category-number">02</span><span class="category-icon">▧</span><strong>Vật liệu</strong><small>So sánh vật liệu, độ bền, công năng và chi phí.</small><span class="tile-arrow">↗</span></button>
+          <button class="category-tile" type="button" data-category="gia-dung"><span class="category-number">03</span><span class="category-icon">◫</span><strong>Gia dụng</strong><small>Thiết bị và sản phẩm hữu ích trong sinh hoạt.</small><span class="tile-arrow">↗</span></button>
+          <button class="category-tile" type="button" data-category="cong-nghe"><span class="category-number">04</span><span class="category-icon">⌘</span><strong>Công nghệ</strong><small>Thiết bị thông minh và giải pháp tiện nghi.</small><span class="tile-arrow">↗</span></button>
+          <button class="category-tile" type="button" data-category="review"><span class="category-number">05</span><span class="category-icon">◎</span><strong>Review</strong><small>Đánh giá ưu, nhược điểm trước khi quyết định mua.</small><span class="tile-arrow">↗</span></button>
+          <button class="category-tile" type="button" data-category="kien-thuc"><span class="category-number">06</span><span class="category-icon">✳</span><strong>Kiến thức</strong><small>Những kinh nghiệm nền tảng cho người chuẩn bị xây, sửa nhà.</small><span class="tile-arrow">↗</span></button>
         </div>
       </div>
     </section>
 
-    <section class="latest section">
+    <section class="section articles-section" id="bai-viet">
       <div class="container">
-        <h2>Bài viết mới nhất</h2>
-        <div class="article-grid" id="article-grid">
-          <p style="grid-column: 1/-1; text-align: center; color: #888; padding: 20px;">Đang tải bài viết...</p>
+        <div class="section-heading articles-heading">
+          <div><p class="eyebrow">TỪ GÓC NHÌN NGƯỜI LÀM NGHỀ</p><h2>Những bài viết đáng đọc</h2></div>
+          <label class="search-box"><span aria-hidden="true">⌕</span><input id="article-search" type="search" placeholder="Tìm chủ đề bạn quan tâm..." aria-label="Tìm bài viết"></label>
         </div>
+        <div class="filter-row" aria-label="Lọc bài viết">
+          <button class="filter-chip is-active" type="button" data-filter="all">Tất cả</button>
+          <button class="filter-chip" type="button" data-filter="nha-cua">Nhà cửa</button>
+          <button class="filter-chip" type="button" data-filter="vat-lieu">Vật liệu</button>
+          <button class="filter-chip" type="button" data-filter="gia-dung">Gia dụng</button>
+          <button class="filter-chip" type="button" data-filter="cong-nghe">Công nghệ</button>
+          <button class="filter-chip" type="button" data-filter="review">Review</button>
+          <button class="filter-chip" type="button" data-filter="kien-thuc">Kiến thức</button>
+        </div>
+        <div id="featured-article" class="featured-article" aria-live="polite"></div>
+        <div id="article-grid" class="article-grid" aria-live="polite"><div class="loading-state">Đang tải bài viết...</div></div>
+        <p id="article-status" class="article-status" aria-live="polite"></p>
       </div>
+    </section>
+
+    <section class="quote-section">
+      <div class="container quote-inner">
+        <p class="eyebrow light">MỘT GÓC NHÌN KHÁC</p>
+        <blockquote>“Một sản phẩm phù hợp không nhất thiết là sản phẩm đắt nhất. Quan trọng là hiểu mình cần gì trước khi chọn.”</blockquote>
+        <p class="quote-credit">GÓC THIẾT KẾ · SOLA</p>
+      </div>
+    </section>
+
+    <section class="newsletter-cta">
+      <div class="container cta-inner"><div><p class="eyebrow">BẠN ĐANG CHUẨN BỊ LÀM NHÀ?</p><h2>Đừng chọn theo cảm tính.<br><em>Hãy hiểu trước khi quyết định.</em></h2></div><a class="button button-dark" href="https://zalo.me/0912539316" target="_blank" rel="noopener">Kết nối tư vấn <span aria-hidden="true">↗</span></a></div>
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer class="site-footer">
-    <div class="footer-container">
-      
-      <!-- 1. CHỮ N SVG CÁCH ĐIỆU - KHÔNG Ô VUÔNG - DỊCH BÊN TRÁI -->
-      <div class="footer-logo-standalone">
-        <svg class="logo-n-custom" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 22 15 L 22 105" stroke="#d4b08c" stroke-width="4.5" stroke-linecap="round"/>
-          <path d="M 22 25 C 45 40, 35 80, 78 100" stroke="#d4b08c" stroke-width="3.5" fill="none"/>
-          <path d="M 22 45 C 50 60, 45 85, 78 100" stroke="#d4b08c" stroke-width="2.5" fill="none"/>
-          <path d="M 78 45 L 60 100" stroke="#d4b08c" stroke-width="4" stroke-linecap="round"/>
-        </svg>
-      </div>
-
-      <!-- 2. KHUNG ẢNH CHÂN DUNG -->
-      <div class="footer-avatar-frame">
-        <img src="https://youdayfwoygyudcgpkpf.supabase.co/storage/v1/object/public/posts/DSC08182_(2).jpg" alt="Quỳnh Như">
-      </div>
-
-      <!-- 3. THÔNG TIN LIÊN HỆ -->
-      <div class="footer-contact-box">
-        <div class="title-connect-lora">LET'S CONNECT</div>
-        
-        <div class="contact-row">
-          <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-          <a href="mailto:nhunhu13061@gmail.com" class="text-light">nhunhu13061@gmail.com</a>
-        </div>
-        
-        <div class="contact-row">
-          <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-          <span>Hotline 1: <a href="tel:0912539316" class="text-light">0912 539 316</a> (Ms. Như)</span>
-        </div>
-        
-        <div class="contact-row">
-          <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-          <span>Hotline 2: <a href="tel:0989780177" class="text-light">0989 780 177</a> (Ms. Như)</span>
-        </div>
-        
-        <div class="contact-row">
-          <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-          <span>Tư vấn thiết kế & xây dựng (Zalo): <a href="https://zalo.me/0912539316" target="_blank" class="text-light">0912 539 316</a></span>
-        </div>
-        
-        <div class="contact-row">
-          <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-          <span class="text-light">969 Trần Hưng Đạo, P. Quy Nhơn, T. Gia Lai</span>
-        </div>
-      </div>
-
-      <div class="footer-v-line"></div>
-
-      <!-- 4. TRÍCH DẪN & KẾT NỐI -->
-      <div class="footer-quote-box">
-        <div class="quote-content">
-          Tôi không dám nói mình biết tất cả, nhưng những gì đã trải qua, tôi muốn chia sẻ để khách hàng bớt mất tiền vì những điều không đáng.
-        </div>
-        <div class="author-tag">— QUỲNH NHƯ —</div>
-        <a href="https://www.facebook.com/quynh.nhu.674793?locale=vi_VN" target="_blank" class="btn-fb-connect">
-          <svg class="svg-icon-sm" viewBox="0 0 24 24" fill="#ffffff"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          Kết nối qua Facebook
-        </a>
-      </div>
-
+    <div class="container footer-main">
+      <div class="footer-brand"><a class="brand brand-footer" href="index.html"><span class="brand-mark">G</span><span class="brand-word">Góc Thiết Kế<small>SOLA · LIVING WITH INTENTION</small></span></a><p>Góc nhìn người làm nghề – So sánh chuẩn, chọn đúng cho tổ ấm.</p></div>
+      <div class="footer-column"><h3>Khám phá</h3><a href="#danh-muc">Chuyên mục</a><a href="#bai-viet">Bài viết mới</a><a href="affiliate-disclosure.html">Minh bạch Affiliate</a></div>
+      <div class="footer-column"><h3>Kết nối</h3><a href="mailto:nhunhu13061@gmail.com">nhunhu13061@gmail.com</a><a href="tel:0912539316">0912 539 316</a><a href="https://zalo.me/0912539316" target="_blank" rel="noopener">Zalo tư vấn</a><a href="https://www.facebook.com/quynh.nhu.674793?locale=vi_VN" target="_blank" rel="noopener">Facebook</a></div>
+      <div class="footer-column footer-address"><h3>Thông tin</h3><p>969 Trần Hưng Đạo,<br>P. Quy Nhơn, T. Gia Lai</p><p>Nội dung được chia sẻ với mục tiêu giúp người đọc có thêm cơ sở trước khi lựa chọn.</p></div>
     </div>
+    <div class="container footer-bottom"><span>© <span id="current-year"></span> GÓC THIẾT KẾ SOLA</span><span>Được xây dựng từ góc nhìn người làm nghề.</span></div>
   </footer>
-
-  <!-- THƯ VIỆN & SCRIPT LOAD BÀI VIẾT TỪ SUPABASE -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    const SUPABASE_URL = 'https://youdayfwoygyudcgpkpf.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_b8rHawI1m1qFnSLjPMrSZw_oR_Tkwk7';
-
-    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    async function loadLatestPosts() {
-      const container = document.getElementById('article-grid');
-      if (!container) return;
-
-      const { data: posts, error } = await supabaseClient
-        .from('posts')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        console.error('Lỗi lấy bài viết:', error);
-        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #d9534f;">Không thể tải danh sách bài viết. Vui lòng kiểm tra lại kết nối!</p>';
-        return;
-      }
-
-      if (!posts || posts.length === 0) {
-        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666;">Chưa có bài viết nào được xuất bản.</p>';
-        return;
-      }
-
-      container.innerHTML = posts.map(post => {
-        const coverImg = post.cover_image || 'https://via.placeholder.com/600x400?text=Kien+Thuc+SOLA';
-        const categoryName = (post.category || 'BÀI VIẾT').toUpperCase();
-        
-        // Làm sạch thẻ HTML để lấy mô tả ngắn gọn
-        let rawSummary = post.summary || post.content || '';
-        let cleanSummary = rawSummary.replace(/<[^>]*>?/gm, '').trim();
-        if (cleanSummary.length > 90) {
-          cleanSummary = cleanSummary.substring(0, 90) + '...';
-        }
-
-        const postLink = post.slug ? `post.html?slug=${post.slug}` : `post.html?id=${post.id}`;
-
-        return `
-          <article class="article-card">
-            <div class="article-photo" style="background-image: url('${coverImg}'); background-size: cover; background-position: center; min-height: 200px; border-radius: 8px 8px 0 0;"></div>
-            <div class="article-body">
-              <span>${categoryName}</span>
-              <h3>${post.title}</h3>
-              <p>${cleanSummary}</p>
-              <a href="${postLink}">Đọc bài viết →</a>
-            </div>
-          </article>
-        `;
-      }).join('');
-    }
-
-    document.addEventListener('DOMContentLoaded', loadLatestPosts);
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const mainNav = document.getElementById('main-nav');
+    if (menuToggle && mainNav) menuToggle.addEventListener('click', () => {
+      const opened = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', String(!opened));
+      mainNav.classList.toggle('is-open', !opened);
+    });
   </script>
-
 </body>
 </html>

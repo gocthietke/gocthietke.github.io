@@ -1,428 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chi Tiết Bài Viết - Kiến Thức SOLA</title>
-  
-  <!-- Supabase & Marked JS -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  
-  <!-- Font Awesome & Google Fonts -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f5f0">
+  <meta name="description" content="Bài viết từ Góc Thiết Kế SOLA.">
+  <meta property="og:site_name" content="Góc Thiết Kế SOLA">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Bài viết | Góc Thiết Kế SOLA</title>
+  <link rel="canonical" href="https://gocthietke.github.io/post.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body { 
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-      margin: 0; 
-      padding: 0; 
-      color: #222; 
-      line-height: 1.8; 
-      background-color: #fcfcfc;
-    }
-    
-    .main-container {
-      max-width: 850px; 
-      margin: 40px auto; 
-      padding: 0 20px; 
-    }
-
-    .post-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 15px; color: #111; line-height: 1.3; }
-    .post-meta { font-size: 0.9rem; color: #666; margin-bottom: 25px; display: flex; gap: 15px; flex-wrap: wrap; }
-    .cover-img { width: 100%; max-height: 480px; object-fit: cover; border-radius: 10px; margin-bottom: 25px; }
-
-    /* TOC STYLES */
-    .toc-box {
-      background-color: #f8f9fa;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      padding: 18px 24px;
-      margin: 30px 0;
-    }
-    .toc-title {
-      font-weight: 700;
-      font-size: 1.15rem;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #1f2937;
-    }
-    .toc-list { list-style-type: none; padding-left: 0; margin: 0; }
-    .toc-list li { margin-bottom: 8px; line-height: 1.5; }
-    .toc-list li.toc-h2 { font-weight: 600; margin-top: 10px; }
-    .toc-list li.toc-h3 { padding-left: 20px; font-size: 0.95rem; color: #4b5563; }
-    .toc-list a { color: #2563eb; text-decoration: none; }
-    .toc-list a:hover { text-decoration: underline; }
-
-    /* CONTENT STYLES */
-    #post-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 20px 0; display: block; }
-    #post-content h2 { font-size: 1.5rem; margin-top: 35px; border-bottom: 1px solid #eee; padding-bottom: 8px; color: #111; scroll-margin-top: 30px; }
-    #post-content h3 { font-size: 1.25rem; margin-top: 25px; color: #333; scroll-margin-top: 30px; }
-    #post-content p { margin-bottom: 18px; font-size: 1.05rem; word-break: break-word; }
-    #post-content blockquote { border-left: 4px solid #ee4d2d; margin: 20px 0; padding-left: 15px; color: #555; font-style: italic; }
-
-    .affiliate-btn { 
-      display: inline-flex; 
-      align-items: center;
-      gap: 8px;
-      background: #ee4d2d; 
-      color: white; 
-      padding: 12px 26px; 
-      border-radius: 6px; 
-      text-decoration: none; 
-      font-weight: bold; 
-      margin: 25px 0; 
-      transition: background 0.2s; 
-    }
-    .affiliate-btn:hover { background: #d73211; }
-
-    /* FOOTER STYLES CHUẨN MẪU */
-    .site-footer {
-      background-color: #1b0a0e;
-      color: #ffffff;
-      padding: 40px 20px;
-      margin-top: 60px;
-    }
-    .footer-container {
-      max-width: 1150px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    /* LOGO SVG TRỰC TIẾP KHÔNG BÓ KHUNG */
-    .footer-logo-clean {
-      width: 110px;
-      height: 150px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .logo-n-svg {
-      width: 95px;
-      height: 120px;
-    }
-
-    /* KHUNG ẢNH ĐẠI DIỆN VÒM */
-    .footer-avatar-frame {
-      width: 145px;
-      height: 200px;
-      border-radius: 70px 70px 10px 10px;
-      overflow: hidden;
-      border: 1px solid rgba(212, 175, 55, 0.4);
-      flex-shrink: 0;
-    }
-    .footer-avatar-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* THÔNG TIN LIÊN HỆ & ICON TRẮNG */
-    .footer-contact-box {
-      flex: 1.1;
-      font-family: 'Times New Roman', Times, serif;
-      font-style: italic;
-      font-size: 15px;
-      line-height: 1.9;
-      color: #f3e8df;
-    }
-    .title-connect-lora {
-      font-family: 'Lora', serif;
-      font-style: normal;
-      font-weight: 700;
-      font-size: 17px;
-      color: #ffd700;
-      letter-spacing: 1.5px;
-      margin-bottom: 12px;
-      text-transform: uppercase;
-    }
-    .contact-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-    .contact-row i {
-      width: 16px;
-      font-size: 14px;
-      color: #ffffff;
-      text-align: center;
-      font-style: normal;
-    }
-    .contact-row a {
-      color: #f3e8df;
-      text-decoration: none;
-    }
-    .contact-row a:hover {
-      color: #ffd700;
-    }
-
-    /* ĐƯỜNG PHÂN CÁCH DỌC */
-    .footer-v-line {
-      width: 1px;
-      height: 150px;
-      background: rgba(255, 255, 255, 0.15);
-      margin: 0 10px;
-    }
-
-    /* TRÍCH DẪN & NÚT FB */
-    .footer-quote-box {
-      flex: 1.2;
-      font-family: 'Times New Roman', Times, serif;
-      font-style: italic;
-      font-size: 15px;
-      line-height: 1.6;
-      color: #f3e8df;
-    }
-    .quote-content {
-      position: relative;
-      padding-left: 20px;
-      margin-bottom: 12px;
-    }
-    .quote-content::before {
-      content: "“";
-      font-size: 30px;
-      color: #ffd700;
-      position: absolute;
-      left: 0;
-      top: -8px;
-      font-style: normal;
-    }
-    .author-tag {
-      color: #ffd700;
-      font-weight: bold;
-      font-style: normal;
-      font-size: 13px;
-      display: block;
-      margin-bottom: 15px;
-    }
-    .btn-fb-connect {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      color: #fff;
-      padding: 8px 16px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-style: normal;
-      font-size: 13px;
-      transition: 0.3s;
-    }
-    .btn-fb-connect:hover {
-      background: rgba(255, 255, 255, 0.18);
-    }
-
-    @media (max-width: 850px) {
-      .footer-container { flex-direction: column; text-align: center; }
-      .footer-v-line { display: none; }
-      .contact-row { justify-content: center; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js" defer></script>
+  <script src="post.js" defer></script>
 </head>
-<body>
-
-  <div class="main-container">
-    <h1 id="title" class="post-title">Đang tải bài viết...</h1>
-    <div id="meta" class="post-meta"></div>
-    <img id="cover" class="cover-img" style="display:none;" alt="Ảnh bìa bài viết">
-    
-    <!-- Table of contents -->
-    <div id="toc-container" class="toc-box" style="display:none;">
-      <div class="toc-title">
-        <i class="fa-solid fa-list-ol"></i>
-        <span>Mục lục bài viết</span>
-      </div>
-      <ul id="toc-list" class="toc-list"></ul>
+<body class="post-page">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Góc Thiết Kế SOLA"><span class="brand-mark">G</span><span class="brand-word">Góc Thiết Kế<small>SOLA · LIVING WITH INTENTION</small></span></a>
+      <nav class="main-nav" aria-label="Điều hướng chính"><a href="index.html">Trang chủ</a><a href="index.html#danh-muc">Chuyên mục</a><a href="index.html#bai-viet">Bài viết</a><a href="affiliate-disclosure.html">Minh bạch Affiliate</a></nav>
+      <a class="back-link" href="index.html">← Về trang chủ</a>
     </div>
-
-    <!-- Article Content -->
-    <div id="post-content"></div>
-    <div id="affiliate-container"></div>
-  </div>
-
-  <!-- CHÂN TRANG ĐUỔI CHUẨN MẪU GỐC -->
+  </header>
+  <div class="post-topbar"><div class="container"><a class="back-link" href="index.html">← Tất cả bài viết</a></div></div>
+  <main id="main-content">
+    <div id="post-error" class="post-error" hidden><h1>Không tìm thấy bài viết</h1><p>Bài viết có thể chưa được xuất bản hoặc đường dẫn không còn hợp lệ.</p><a class="button button-dark" href="index.html">Quay lại trang chủ</a></div>
+    <article id="post-layout" class="post-layout" hidden>
+      <header class="post-header">
+        <div id="post-category" class="post-category"></div>
+        <h1 id="post-title" class="post-title">Đang tải bài viết...</h1>
+        <div id="post-meta" class="post-meta"></div>
+      </header>
+      <img id="post-cover" class="post-cover" alt="" hidden>
+      <p id="post-summary" class="post-summary" hidden></p>
+      <aside id="toc-container" class="toc-box" hidden><h2 class="toc-title">Trong bài viết này</h2><ol id="toc-list" class="toc-list"></ol></aside>
+      <div id="post-content" class="post-content"></div>
+      <section id="post-affiliate" class="post-affiliate" hidden>
+        <h2>Sản phẩm được nhắc đến</h2>
+        <div id="product-grid" class="product-grid"></div>
+        <p class="affiliate-note">Một số đường dẫn có thể là liên kết tiếp thị liên kết. SOLA có thể nhận hoa hồng khi bạn mua hàng qua liên kết, không làm thay đổi giá bạn thanh toán.</p>
+      </section>
+      <div class="post-share"><span>Thấy bài viết hữu ích? Chia sẻ để nhiều người cùng tham khảo.</span><button type="button" id="share-button">Chia sẻ bài viết ↗</button></div>
+    </article>
+    <section class="related-section" id="related-section" hidden><div class="container"><h2>Bài viết liên quan</h2><div id="related-grid" class="related-grid"></div></div></section>
+  </main>
   <footer class="site-footer">
-    <div class="footer-container">
-      
-      <!-- LOGO N CÁCH ĐIỆU SẮC NÉT KHÔNG BÓ KHUNG -->
-      <div class="footer-logo-clean">
-        <svg class="logo-n-svg" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 22 25 L 22 95" stroke="#d4b08c" stroke-width="3.5" stroke-linecap="round"/>
-          <path d="M 78 40 L 78 95" stroke="#d4b08c" stroke-width="3.5" stroke-linecap="round"/>
-          <path d="M 22 30 Q 42 60 78 95" stroke="#d4b08c" stroke-width="2.5" fill="none"/>
-          <path d="M 48 28 Q 42 65 78 95" stroke="#d4b08c" stroke-width="2.5" fill="none"/>
-          <circle cx="48" cy="18" r="3.5" fill="#d4b08c"/>
-        </svg>
-      </div>
-
-      <!-- ẢNH ĐẠI DIỆN -->
-      <div class="footer-avatar-frame">
-        <img src="https://youdayfwoygyudcgpkpf.supabase.co/storage/v1/object/public/posts/DSC08182_(2).jpg" alt="Quỳnh Như">
-      </div>
-
-      <!-- KHỐI THÔNG TIN LIÊN HỆ DÙNG ICON TRẮNG NÉT MẢNH -->
-      <div class="footer-contact-box">
-        <div class="title-connect-lora">LET'S CONNECT</div>
-        
-        <div class="contact-row">
-          <i class="fa-regular fa-envelope"></i>
-          <span><a href="mailto:nhunhu13061@gmail.com">nhunhu13061@gmail.com</a></span>
-        </div>
-        
-        <div class="contact-row">
-          <i class="fa-solid fa-phone"></i>
-          <span>Hotline 1: <a href="tel:0912539316">0912 539 316</a> (Ms. Như)</span>
-        </div>
-        
-        <div class="contact-row">
-          <i class="fa-solid fa-phone"></i>
-          <span>Hotline 2: <a href="tel:0989780177">0989 780 177</a> (Ms. Như)</span>
-        </div>
-        
-        <div class="contact-row">
-          <i class="fa-regular fa-comment-dots"></i>
-          <span>Tư vấn thiết kế & xây dựng (Zalo): <a href="https://zalo.me/0912539316" target="_blank">0912 539 316</a></span>
-        </div>
-        
-        <div class="contact-row">
-          <i class="fa-regular fa-compass"></i>
-          <span>969 Trần Hưng Đạo, P. Quy Nhơn, T. Gia Lai</span>
-        </div>
-      </div>
-
-      <div class="footer-v-line"></div>
-
-      <!-- KHỐI TRÍCH DẪN & KẾT NỐI -->
-      <div class="footer-quote-box">
-        <div class="quote-content">
-          Tôi không dám nói mình biết tất cả, nhưng những gì đã trải qua, tôi muốn chia sẻ để khách hàng bớt mất tiền vì những điều không đáng.
-        </div>
-        <span class="author-tag">— QUỲNH NHƯ —</span>
-        <a href="https://www.facebook.com/quynh.nhu.674793?locale=vi_VN" target="_blank" class="btn-fb-connect">
-          <i class="fa-brands fa-facebook"></i> Kết nối qua Facebook
-        </a>
-      </div>
-
+    <div class="container footer-main">
+      <div class="footer-brand"><a class="brand brand-footer" href="index.html"><span class="brand-mark">G</span><span class="brand-word">Góc Thiết Kế<small>SOLA · LIVING WITH INTENTION</small></span></a><p>Góc nhìn người làm nghề – So sánh chuẩn, chọn đúng cho tổ ấm.</p></div>
+      <div class="footer-column"><h3>Khám phá</h3><a href="index.html#danh-muc">Chuyên mục</a><a href="index.html#bai-viet">Bài viết mới</a><a href="affiliate-disclosure.html">Minh bạch Affiliate</a></div>
+      <div class="footer-column"><h3>Kết nối</h3><a href="mailto:nhunhu13061@gmail.com">nhunhu13061@gmail.com</a><a href="tel:0912539316">0912 539 316</a><a href="https://zalo.me/0912539316" target="_blank" rel="noopener">Zalo tư vấn</a></div>
+      <div class="footer-column footer-address"><h3>Thông tin</h3><p>969 Trần Hưng Đạo,<br>P. Quy Nhơn, T. Gia Lai</p><p>Nội dung được chia sẻ với mục tiêu giúp người đọc có thêm cơ sở trước khi lựa chọn.</p></div>
     </div>
+    <div class="container footer-bottom"><span>© <span id="current-year"></span> GÓC THIẾT KẾ SOLA</span><span>Được xây dựng từ góc nhìn người làm nghề.</span></div>
   </footer>
-
-  <script>
-    const SUPABASE_URL = 'https://youdayfwoygyudcgpkpf.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_b8rHawI1m1qFnSLjPMrSZw_oR_Tkwk7';
-    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const postSlug = urlParams.get('slug');
-
-    async function loadPost() {
-      if (!postSlug) {
-        document.getElementById('title').innerText = "Vui lòng chọn bài viết hợp lệ!";
-        return;
-      }
-
-      try {
-        const { data: post, error } = await _supabase
-          .from('posts')
-          .select('*')
-          .eq('slug', postSlug)
-          .single();
-
-        if (error || !post) {
-          document.getElementById('title').innerText = "Không tìm thấy bài viết!";
-          return;
-        }
-
-        // 1. Cập nhật Tiêu đề trang
-        document.title = `${post.title} - Kiến Thức SOLA`;
-        document.getElementById('title').innerText = post.title;
-
-        // 2. Cập nhật Meta Info
-        const postDate = new Date(post.created_at).toLocaleDateString('vi-VN', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        });
-        document.getElementById('meta').innerHTML = `
-          <span><i class="fa-regular fa-folder"></i> ${post.category || 'Chia sẻ'}</span>
-          <span><i class="fa-regular fa-calendar-alt"></i> ${postDate}</span>
-        `;
-
-        // 3. Ảnh Bìa
-        if (post.cover_image) {
-          const coverEl = document.getElementById('cover');
-          coverEl.src = post.cover_image;
-          coverEl.alt = post.title;
-          coverEl.style.display = 'block';
-        }
-
-        // 4. Parse Markdown -> HTML
-        const rawHtml = marked.parse(post.content || '');
-        const contentEl = document.getElementById('post-content');
-        contentEl.innerHTML = rawHtml;
-
-        // 5. Tự động tạo Mục lục
-        generateTableOfContents(contentEl);
-
-        // 6. Nút Affiliate Link
-        if (post.affiliate_link) {
-          document.getElementById('affiliate-container').innerHTML = `
-            <a href="${post.affiliate_link}" target="_blank" rel="nofollow sponsored" class="affiliate-btn">
-              <i class="fa-solid fa-cart-shopping"></i> Xem sản phẩm / Mua ngay
-            </a>
-          `;
-        }
-      } catch (err) {
-        console.error('Lỗi khi tải bài viết:', err);
-        document.getElementById('title').innerText = "Có lỗi xảy ra khi tải bài viết!";
-      }
-    }
-
-    function generateTableOfContents(contentEl) {
-      const headings = contentEl.querySelectorAll('h2, h3');
-      if (headings.length === 0) return;
-
-      const tocList = document.getElementById('toc-list');
-      tocList.innerHTML = '';
-
-      headings.forEach((heading, index) => {
-        const id = 'heading-' + index;
-        heading.setAttribute('id', id);
-
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = '#' + id;
-        a.textContent = heading.textContent;
-
-        if (heading.tagName.toLowerCase() === 'h2') {
-          li.className = 'toc-h2';
-        } else if (heading.tagName.toLowerCase() === 'h3') {
-          li.className = 'toc-h3';
-        }
-
-        li.appendChild(a);
-        tocList.appendChild(li);
-      });
-
-      document.getElementById('toc-container').style.display = 'block';
-    }
-
-    loadPost();
-  </script>
+  <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
